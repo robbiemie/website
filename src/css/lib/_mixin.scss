@@ -1,0 +1,77 @@
+$yellow: #ffc102;
+$black: #000;
+$white: #fff;
+$infoBg: #f6f6f6;
+$border: #e5e5e5;
+$pink: #ff4268;
+$score: #fede36;
+$gray: #f3f3f3;
+
+@mixin bg($url, $width, $height) {
+  background-image: url('~@/img/' + $url + '.png');
+  background-size: $width $height;
+  width: $width;
+  height: $height;
+}
+
+@mixin wh($width, $height) {
+  width: $width;
+  height: $height;
+}
+@mixin flexAllCenter() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin flexCenter() {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin textShadow($color) {
+    text-shadow: -1px -1px 0 $color, 1px -1px 0 $color, -1px 1px 0 $color, 1px 1px 0 $color;
+}
+
+@mixin text-overflow() {
+  word-wrap: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin font-dpr($font-size){
+    font-size: $font-size;
+
+    [data-dpr="2"] & {
+        font-size: $font-size * 2;
+    }
+
+    [data-dpr="3"] & {
+        font-size: $font-size * 3;
+    }
+}
+
+%clearfix {
+    &:before,
+    &:after {
+      display: table;
+      content: "";
+    }
+    &:after {
+      clear: both;
+    }
+  }
+
+  %ir {
+      background-color: transparent;
+      background-repeat: no-repeat;
+      border: 0;
+      direction: ltr;
+      display: block;
+      overflow: hidden;
+      text-align: left;
+      text-indent: -999em;
+      br {
+          display: none;
+      }
+  }

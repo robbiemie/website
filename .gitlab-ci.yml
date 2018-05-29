@@ -1,0 +1,56 @@
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  tags:
+    - fec
+  artifacts:
+    expire_in: 1 week
+    paths:
+    - output/
+    - gitlog
+    - package.json
+    - dragont.config.js
+  script:
+    - npm i
+    - fec o
+  after_script:
+    - git log -1 --pretty=medium >> gitlog
+  only:
+    - /^(master|test|pre)$/
+
+.deploy_template: &deploy_definition
+  stage: deploy
+  tags:
+    - fec
+  variables:
+    GIT_STRATEGY: none
+  before_script:
+    - npm i -g @yy/dragont-preset-feteam
+  script:
+    - dragont ci
+
+deploy_test:
+  <<: *deploy_definition
+  environment:
+    name: test
+  only:
+    - test
+
+deploy_pre:
+  <<: *deploy_definition
+  environment:
+    name: pre
+  only:
+    - pre
+
+deploy_prod:
+  <<: *deploy_definition
+  environment:
+    name: master
+  when: manual
+  allow_failure: false
+  only:
+    - master

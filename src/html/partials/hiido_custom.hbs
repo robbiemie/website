@@ -1,0 +1,68 @@
+<script type="text/javascript">
+    (function () {
+        var getParam = function (name) {
+            var r = new RegExp("(\\?|#|&)" + name + "=([^&#\\?]*)(&|#|$|\\?)");
+            var m = window.location.href.match(r);
+            return decodeURI(!m ? "" : m[2]);
+        };
+        var hiido_wid;
+        _hiido_wid = window._hiido_wid || [];
+//        端内：_b325988831e
+//        端外：_269f651c536
+        var widMap = [
+            'fddss.yy.com',
+            'feidao.yy.com',
+            'fd1.yy.com',
+            'fd2.yy.com',
+            'fd3.yy.com',
+            'fd4.yy.com',
+            'fd5.yy.com',
+            'fd6.yy.com',
+            'fd7.yy.com',
+            'fd8.yy.com',
+            'fd9.yy.com'
+        ]
+        var hiidoWidMap = {
+            'fddss.yy.com': '_79e8529ebf2',
+            'feidao.yy.com': '_b17880ab105',
+            'fd1.yy.com': '_281436a42f7',
+            'fd2.yy.com': '_5cef0af1325',
+            'fd3.yy.com': '_7928837e423',
+            'fd4.yy.com': '_2947129ec84',
+            'fd5.yy.com': '_2bcbc6a91a1',
+            'fd6.yy.com': '_3613eb48fe5	 ',
+            'fd7.yy.com': '_5e334e2e050',
+            'fd8.yy.com': '_f7bfdeb8af7 ',
+            'fd9.yy.com': '_534382c0b6d'
+        }
+        if (window.nativeApp) {
+            hiido_wid = '_b325988831e'
+        } else if (widMap.indexOf(location.host) > -1) {
+            hiido_wid = hiidoWidMap[location.host]
+        } else {
+            hiido_wid = '_269f651c536'
+        }
+
+        if (getParam('mark')) {
+            // _046b3ba0050	飞刀游戏ofo-端内
+            // _aabff4b8ad7	飞刀游戏boss-端内
+            // _1b07c9e5ffe	飞刀游戏ofo-端外
+            // _970e117afd4	飞刀游戏boss-端外
+            var adType = parseInt(getParam('mark'), 0) // 0:ofo 1:boss
+            var isApp = window.nativeApp ? 1 : 0
+            hiido_wid = isApp ? ['_046b3ba0050', '_aabff4b8ad7'][adType] : ['_1b07c9e5ffe', '_970e117afd4'][adType]
+        }
+
+        _hiido_wid.push(hiido_wid);//全站数据
+        var wid = getParam('wid');
+        if (wid) {
+            _hiido_wid.push(wid);//通过参数来的统计代码
+        }
+        var d = document;
+        var s = d.createElement("script");
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = '//hdjs.hiido.com/hiido_internal.js';
+        d.getElementsByTagName("head")[0].appendChild(s);
+    })();
+</script>

@@ -1,0 +1,35 @@
+.pa {
+    position: absolute;
+}
+.pr {
+    position: relative;
+}
+.pf {
+    position: fixed;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.ell {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.tc {
+    text-align: center;
+}
+.fixMt {
+    &:before {
+      content: '.';
+      height: 0px;
+      visibility: hidden;
+      display: block;
+    }
+}
+@font-face {
+    font-family: '04B';
+    src: url('https://vipweb.bs2cdn.yy.com/vipinter_d0c1515b3b3345ca9ae0f22866f904a3.ttf') format('truetype');
+}

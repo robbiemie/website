@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" data-uid="charles">
+    <title  data-uid="charles">{{title}}</title>
+    <meta  data-uid="charles" name="keywords" content="{{keywords}}">
+    <meta  data-uid="charles" name="description" content="{{description}}">
+    <meta  data-uid="charles" name="format-detection" content="telephone=no, email=no">
+    <meta  data-uid="charles" name="applicable-device" content="mobile">
+</head>
+<body>
+{{>flexible}}
+{% body %}
+{{#if __PROD__}}
+    <script src="//res.yy.com/libs/vue/2.5.3/vue.min.js"></script>
+{{else}}
+    <script src="//res.yy.com/libs/vue/2.5.3/vue.js"></script>
+{{/if}}
+</body>
+</html>
