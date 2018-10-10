@@ -1,14 +1,17 @@
 <template>
   <div class="view-work">
+    <Aratical/>
     <div class="view__circle"></div>
   </div>
 </template>
 
 <script>
+import Aratical from '@/component/artical/index'
 
 export default {
   name: 'Work',
   components: {
+    Aratical
   },
   data () {
     return {
@@ -24,6 +27,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~@/css/index.scss';
+
   @keyframes circle {
     0% {
       width: 20px;
@@ -52,6 +57,7 @@ export default {
 
   .view {
     &-work {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -62,6 +68,7 @@ export default {
       animation: gradientBgColor 12s linear infinite;
     }
     &__circle {
+      position: absolute;
       width: 20px;
       height: 20px;
       border-radius: 20px;
