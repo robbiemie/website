@@ -1,13 +1,22 @@
 import Vue from 'vue'
 import App from '@/container/Index.vue'
+import Lang from '@/common/language'
+import VueI18n from 'vue-i18n'
 import VueMessages from 'vue-messages'
 
+Vue.use(VueI18n)
 Vue.use(VueMessages)
+
+const i18n = new VueI18n({
+  locale: 'en', // set locale
+  messages: Lang // set locale messages
+})
 
 const Init = {
   initView () {
     new Vue({ // eslint-disable-line
       el: '#app',
+      i18n,
       render: h => h(App)
     })
   }

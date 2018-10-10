@@ -2,22 +2,26 @@
   <div class="artical">
     <header>
       <div class="artical__title">
-        移动端 Message组件
+        {{$t('message.title')}}
       </div>
       <div class="artical__desc">
-        更加轻量，一款基于Vue2.0的移动端Message UI组件
+        {{$t('message.desc')}}
+      </div>
+      <div class="artical__trans">
+        <span class="artical__trans--zh" @click="changeLang('zh')">中文</span>
+        <span class="artical__trans--en" @click="changeLang('en')">English</span>
       </div>
       <a class="artical__github--url" href="https://github.com/yang657850144/vue-message">
         Github <img class="artical__github" src="https://makefriends.bs2dl.yy.com/bm1539174882949.png" />
       </a>
     </header>
     <div class="artical__content">
-      <div class="artical__btn--main">功能演示</div>
+      <div class="artical__btn--main">{{$t('message.demo')}}</div>
       <div class="artical__list">
-        <div class="artical__btn artical__btn--success" @click="success">成功</div>
-        <div class="artical__btn artical__btn--error" @click="error">错误</div>
-        <div class="artical__btn artical__btn--warning" @click="warning">警告</div>
-        <div class="artical__btn artical__btn--info" @click="info">信息</div>
+        <div class="artical__btn artical__btn--success" @click="success">{{$t('message.success')}}</div>
+        <div class="artical__btn artical__btn--error" @click="error">{{$t('message.error')}}</div>
+        <div class="artical__btn artical__btn--warning" @click="warning">{{$t('message.warning')}}</div>
+        <div class="artical__btn artical__btn--info" @click="info">{{$t('message.info')}}</div>
       </div>
     </div>
   </div>
@@ -28,20 +32,20 @@ export default {
   name: 'artical',
   methods: {
     success () {
-      console.log(1)
-      this.$Message.success('成功')
+      this.$Message.success(this.$t('message.success'))
     },
     error () {
-      console.log(2)
-      this.$Message.error('错误')
+      this.$Message.error(this.$t('message.error'))
     },
     warning () {
-      console.log(3)
-      this.$Message.warning('警告')
+      this.$Message.warning(this.$t('message.warning'))
     },
     info () {
-      console.log(4)
-      this.$Message.info('信息')
+      this.$Message.info(this.$t('message.info'))
+    },
+    changeLang (lang) {
+      console.log('lang', lang, this.$i18n)
+      this.$i18n.locale = lang
     }
   }
 }
@@ -82,6 +86,25 @@ export default {
       border: 1px solid #000;
       border-radius: 30px;
     }
+  }
+  &__trans {
+      position: fixed;
+      padding: 2px 10px;
+      height: 34px;
+      width: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 10px;
+      right: 200px;
+      color:#000;
+      font-weight: bold;
+      border: 1px solid #000;
+      border-radius: 30px;
+      span {
+        margin: 0 10px;
+      }
+
   }
   &__content {
       margin-top: 300px;
