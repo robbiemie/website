@@ -1,6 +1,6 @@
 <template>
   <div class="view-work">
-    <Aratical/>
+    <Aratical class="view__artical"/>
     <div class="view__circle"></div>
   </div>
 </template>
@@ -56,6 +56,9 @@ export default {
   }
 
   .view {
+    &__artical {
+      z-index: 999;
+    }
     &-work {
       position: relative;
       display: flex;

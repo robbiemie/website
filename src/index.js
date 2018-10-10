@@ -1,4 +1,8 @@
+import Vue from 'vue'
 import App from '@/container/Index.vue'
+import VueMessages from 'vue-messages'
+
+Vue.use(VueMessages)
 
 const Init = {
   initView () {
