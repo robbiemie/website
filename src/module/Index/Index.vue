@@ -1,7 +1,6 @@
 <template>
   <div class="view-home">
     <div class="view-container main">
-      <!-- <div class="main__header"></div> -->
       <IMenu class="main__menu"></IMenu>
       <div class="main__content">
         <div class="main__content-left"></div>
@@ -18,7 +17,9 @@
       <IFooter class="main__footer"></IFooter>
     </div>
     <video class="view-video" autoplay loop src='http://www.yangoogle.com/static/background.mp4' ></video>
-    <IMask v-if="loadingComplete"></IMask>
+    <transition name="fade">
+      <IMask v-if="loadingComplete"></IMask>
+    </transition>
   </div>
 </template>
 
@@ -45,7 +46,7 @@ export default {
     let self = this
     setTimeout(() => {
       self.loadingComplete = false
-    }, 10000)
+    }, 1000)
   },
   computed: {
   },
@@ -152,5 +153,11 @@ export default {
     background-color: #000;
     transform: scaleY(0.5);
   }
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
