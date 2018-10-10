@@ -1,22 +1,17 @@
 {
-  "name": "singlegame-luckybag-201804-site-mob",
-  "description": "singlegame-luckybag-201804-site-mob",
+  "name": "website",
+  "description": "website",
   "author": {
-    "name": "linjiazhi",
-    "email": "linjiazhi@yy.com"
+    "name": "charlesYang",
+    "email": "yang657850144@163.com"
   },
   "license": "UNLICENSED",
   "dependencies": {
     "@yy/eslint-config-fec": "^1.1.2",
     "axios": "^0.18.0",
     "jsonp": "0.2.1",
-    "svgaplayerweb": "^2.1.0",
-    "udb43login-mob": "git+http://git.yypm.com/lib/udb43login-mob.git",
     "vue": "2.5.14",
-    "vue-awesome-swiper": "^3.1.3",
-    "vue-infinite-scroll": "^2.0.2",
-    "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vue-router": "^3.0.1"
   },
   "scripts": {
     "dev": "fec d",
@@ -26,19 +21,6 @@
   },
   "eslintConfig": {
     "extends": "@yy/fec"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://npm-registry.yy.com"
-  },
-  "dragont": {
-    "biz": "kaixindou",
-    "proj": "singlegameluckybag",
-    "alias": "1804劳动节活动",
-    "desc": "1804劳动节活动",
-    "preset": "feteam",
-    "domain": "langrensha.yy.com",
-    "path": "singlegameluckybag"
   },
   "eslintIgnore": [
     "/dev",
