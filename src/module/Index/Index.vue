@@ -16,7 +16,9 @@
       </div>
       <IFooter class="main__footer"></IFooter>
     </div>
-    <video class="view-video" autoplay loop src='http://www.yangoogle.com/static/background.mp4' ></video>
+    <div class="view-video">
+      <video ref="vd" autoplay="autoplay" preload="auto" loop src='https://makefriends.bs2dl.yy.com/bm1539173365344.mp4'></video>
+    </div>
     <transition name="fade">
       <IMask v-if="loadingComplete"></IMask>
     </transition>
@@ -46,6 +48,7 @@ export default {
     let self = this
     setTimeout(() => {
       self.loadingComplete = false
+      this.$refs.vd.play()
     }, 1000)
   },
   computed: {

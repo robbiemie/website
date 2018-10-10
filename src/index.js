@@ -1,5 +1,3 @@
-import '@/lib/promisePolyfill'
-import '@/lib/polyfill'
 import App from '@/container/Index.vue'
 
 const Init = {
