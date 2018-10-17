@@ -105,16 +105,15 @@ export const tabelHeader = function () {
       render: (h, { row, index }) => {
         let renderElem = h('i-button', {
           props: {
-            type: 'error',
+            type: 'primary',
             size: 'small'
           },
           on: {
             click: (e) => {
-              this.delete(index)
             }
           }
 
-        }, '删除')
+        }, '查看')
         return renderElem
       }
     }
