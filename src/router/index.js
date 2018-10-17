@@ -17,6 +17,12 @@ const router = new VueRouter({
       meta: { title: 'Works' }
     },
     {
+      path: '/svg',
+      component: _ => import('@/module/Svg/index'),
+      name: 'work',
+      meta: { title: 'SVG Tools' }
+    },
+    {
       path: '*',
       component: _ => import('@/module/Index/Index'),
       name: 'index',

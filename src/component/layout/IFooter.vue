@@ -1,7 +1,7 @@
 <template>
   <div class="IFooter-box">
     <router-link to="home" class="IFooter-item"><span>HOME</span> <div class="mask"></div></router-link>
-    <router-link to="about" class="IFooter-item"><span>ABOUT</span> <div class="mask"></div></router-link>
+    <router-link to="svg" class="IFooter-item"><span>SVG</span> <div class="mask"></div></router-link>
     <router-link to="work" class="IFooter-item"><span>WORK</span> <div class="mask"></div></router-link>
     <router-link to="contact" class="IFooter-item"><span>CONTACT</span> <div class="mask"></div></router-link>
   </div>

@@ -3,8 +3,11 @@ import App from '@/container/Index.vue'
 import Lang from '@/common/language'
 import VueI18n from 'vue-i18n'
 import VueMessages from 'vue-messages'
+import iView from 'iview'
+import 'iview/dist/styles/iview.css'
 
 Vue.use(VueI18n)
+Vue.use(iView)
 Vue.use(VueMessages)
 
 const i18n = new VueI18n({
