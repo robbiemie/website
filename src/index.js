@@ -5,10 +5,14 @@ import VueI18n from 'vue-i18n'
 import VueMessages from 'vue-messages'
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
+// import VueResource from 'vue-resource'
+// import md5 from 'js-md5'
 
+Vue.use(VueMessages)
 Vue.use(VueI18n)
 Vue.use(iView)
-Vue.use(VueMessages)
+// Vue.use(VueResource)
+// Vue.prototype.$md5 = md5
 
 const i18n = new VueI18n({
   locale: 'en', // set locale

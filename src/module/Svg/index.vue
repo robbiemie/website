@@ -1,4 +1,6 @@
 <template>
+<div>
+  <div class="svg__header">SVG艺术字体<span class="svg__header--desc">一个在线生成svg艺术字体的工具</span></div>
   <div class="svg">
     <div class="svg__content">
       <div class="svg__wrapper">
@@ -41,12 +43,15 @@
         </a>
         <p id="svgCss" v-html="svgCSS"></p>
       </Card>
+      <Row>
+        <Button type="info" @click="addDemo">在线演示</Button>
+      </Row>
       <Card class="svg__demo" :bordered="false">
       </Card>
     </div>
     <div class="svg__tools">
       <Tabs class="svg__tabs" style="minHeight:500px;">
-        <TabPane label="基础配置" name="base">
+        <TabPane label="基础样式" name="base">
           <Row>
             宽度: <InputNumber v-model="base.w" @on-change="renderW" placeholder="width" style="width: 80px"></InputNumber>
             高度: <InputNumber v-model="base.h" @on-change="renderH" placeholder="height" style="width: 80px"></InputNumber>
@@ -78,6 +83,7 @@
         </TabPane>
         <TabPane label="多语言配置" name="multiLanguage">
           <Row>
+            <!-- 请填写英文翻译稿: <Input v-model="tableValue[0]" style="width: auto" placeholder="large size" /> -->
           </Row>
           <Table :columns="base.tabelHeader" :data="tableValue"></Table>
         </TabPane>
@@ -85,6 +91,7 @@
       </Tabs>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -95,6 +102,7 @@ import { query } from '@/common/utils'
 let el = null
 let path = null
 let text = null
+let isClicked = false
 
 export default {
   name: 'svg',
@@ -137,9 +145,6 @@ export default {
       this.base.h = svg.height
       // 获取字体默认样式
       this.style.color = text.style.fill
-      setTimeout(() => {
-        this.addDemo()
-      }, 5000)
     },
     renderW (width) {
       el.style.width = width
@@ -207,6 +212,8 @@ export default {
       `
     },
     addDemo () {
+      if (isClicked) return
+      isClicked = true
       // 在线演示
       let demo = query('.svg__demo')
       let script = document.createElement('script')
@@ -245,6 +252,20 @@ export default {
 .svg {
   padding: 20px;
   display: flex;
+  &__header {
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    font-size: 32px;
+    font-weight: bold;
+    font-family: 'sans-serif';
+    color: #2db7f5;
+    &--desc {
+      margin-left: 20px;
+      font-size: 16px;
+      color: #000;
+    }
+  }
   &__content {
     flex: 3;
   }
@@ -257,6 +278,9 @@ export default {
     min-height: 1000px;
   }
   &__source {
+    width: 800px;
+  }
+  &__demo {
     width: 800px;
   }
 }

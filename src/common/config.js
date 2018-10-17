@@ -66,57 +66,50 @@ const langLocKey = {
  * 多语言配置
  */
 export const tabelHeader = function () {
-  return [
-    {
-      title: '#',
-      type: 'index',
-      align: 'center',
-      width: 50
-
-    }, {
-      title: '语言',
-      key: 'lang',
-      align: 'center',
-      width: 150,
-      render: (h, { row, index }) => {
-        let renderOption = null
-        renderOption = langLocKey.lang.map(item => {
-          return <i-option value={item.code} >{item.name}</i-option>
-        })
-        return (
-          <i-select value={this.tableValue[index].lang} on-on-change={ (v) => { this.tableValue[index].lang = v }}>
-            {renderOption}
-          </i-select>
-        )
-      }
-    }, {
-      title: '文本',
-      key: 'text',
-      align: 'center',
-      render: (h, { row, index }) => {
-        return (
-          <i-input value={this.tableValue[index].text} on-on-blur={ e => { this.tableValue[index].text = e.target.value } } placeholder="输入文本" clearable style="width: 130px" />
-        )
-      }
-    }, {
-      title: '操作',
-      key: 'opt',
-      align: 'center',
-      render: (h, { row, index }) => {
-        let renderElem = h('i-button', {
-          props: {
-            type: 'primary',
-            size: 'small'
-          },
-          on: {
-            click: (e) => {
-            }
-          }
-
-        }, '查看')
-        return renderElem
-      }
+  return [{
+    title: '语言',
+    key: 'lang',
+    align: 'center',
+    width: 150,
+    render: (h, { row, index }) => {
+      let renderOption = null
+      renderOption = langLocKey.lang.map(item => {
+        return <i-option value={item.code} >{item.name}</i-option>
+      })
+      return (
+        <i-select value={this.tableValue[index].lang} on-on-change={ (v) => { this.tableValue[index].lang = v }}>
+          {renderOption}
+        </i-select>
+      )
     }
+  }, {
+    title: '文本',
+    key: 'text',
+    align: 'center',
+    render: (h, { row, index }) => {
+      return (
+        <i-input value={this.tableValue[index].text} on-on-blur={ e => { this.tableValue[index].text = e.target.value } } placeholder="输入文本" clearable style="width: 130px" />
+      )
+    }
+  }, {
+    title: '操作',
+    key: 'opt',
+    align: 'center',
+    render: (h, { row, index }) => {
+      let renderElem = h('i-button', {
+        props: {
+          type: 'primary',
+          size: 'small'
+        },
+        on: {
+          click: (e) => {
+          }
+        }
+
+      }, '生成')
+      return renderElem
+    }
+  }
   ]
 }
 /**
