@@ -26,24 +26,35 @@ export const fontFamily = function () {
     label: 'sans-serif'
   }]
 }
-
+/**
+ *
+ */
 /** 国家语言地区码 */
 const langLocKey = {
   lang: [{
-    code: 'zh',
+    code: 'zh-CHS',
     name: '汉语'
+  }, {
+    code: 'ja',
+    name: '日语'
+  }, {
+    code: 'ko',
+    name: '韩语'
+  }, {
+    code: 'fr',
+    name: '法语'
+  }, {
+    code: 'ru',
+    name: '俄语'
+  }, {
+    code: 'de',
+    name: '德语'
   }, {
     code: 'id',
     name: '印尼语'
   }, {
-    code: 'hi',
-    name: '印度语'
-  }, {
-    code: 'en',
+    code: 'EN',
     name: '英语'
-  }, {
-    code: 'th',
-    name: '泰语'
   }, {
     code: 'vi',
     name: '越南语'
@@ -53,9 +64,6 @@ const langLocKey = {
   }, {
     code: 'pt',
     name: '葡语'
-  }, {
-    code: 'ms',
-    name: '马来语'
   }, {
     code: 'ar',
     name: '阿拉伯语'
@@ -67,7 +75,7 @@ const langLocKey = {
  */
 export const tabelHeader = function () {
   return [{
-    title: '语言',
+    title: '翻译语言',
     key: 'lang',
     align: 'center',
     width: 150,
@@ -77,18 +85,19 @@ export const tabelHeader = function () {
         return <i-option value={item.code} >{item.name}</i-option>
       })
       return (
-        <i-select value={this.tableValue[index].lang} on-on-change={ (v) => { this.tableValue[index].lang = v }}>
+        <i-select value={this.tableValue[index].lang} on-on-change={ (v) => { this.tableValue[index].lang = v; this.translation(v) }}>
           {renderOption}
         </i-select>
       )
     }
   }, {
-    title: '文本',
+    title: '翻译文本',
     key: 'text',
     align: 'center',
     render: (h, { row, index }) => {
+      row.text = this.translate.origin
       return (
-        <i-input value={this.tableValue[index].text} on-on-blur={ e => { this.tableValue[index].text = e.target.value } } placeholder="输入文本" clearable style="width: 130px" />
+        <i-input value={this.translate.origin} disabled placeholder="输入文本" clearable style="width: 130px" />
       )
     }
   }, {
@@ -103,10 +112,12 @@ export const tabelHeader = function () {
         },
         on: {
           click: (e) => {
+            // console.log('a', row)
+            this.tableValue[index].text = row.text
           }
         }
 
-      }, '生成')
+      }, '预览')
       return renderElem
     }
   }
@@ -117,8 +128,8 @@ export const tabelHeader = function () {
  */
 export const defaultVal = function () {
   return Object.assign({}, {
-    lang: 'zh',
-    text: '我是你爸爸'
+    lang: 'EN',
+    text: ''
   })
 }
 

@@ -83,7 +83,7 @@
         </TabPane>
         <TabPane label="多语言配置" name="multiLanguage">
           <Row>
-            <!-- 请填写英文翻译稿: <Input v-model="tableValue[0]" style="width: auto" placeholder="large size" /> -->
+            请填写英文翻译稿: <Input v-model="translate.origin" style="width: auto" placeholder="large size" />
           </Row>
           <Table :columns="base.tabelHeader" :data="tableValue"></Table>
         </TabPane>
@@ -98,6 +98,7 @@
 import { fontFamily, tabelHeader, defaultVal } from '@/common/config'
 import Clipboard from 'clipboard'
 import { query } from '@/common/utils'
+import jsonp from 'jsonp'
 
 let el = null
 let path = null
@@ -124,6 +125,15 @@ export default {
         color: '#000',
         dasharray: '0'
       },
+      translate: {
+        q: 'hello', // 需要翻译的文本
+        from: 'EN', // 源语言
+        to: 'zh-CHS', // 目标语言
+        appKey: '0f9fe3ae8208b31e', // 应用 ID
+        salt: 2, // 随机数（自己随便写个数）
+        secret_key: 'juvrU2JGhli0fbAzLHaoSdaI3fuwOvm1', // 密钥
+        translations: []
+      },
       svgDom: null,
       svgCSS: null,
       isquerySource: false,
@@ -145,6 +155,23 @@ export default {
       this.base.h = svg.height
       // 获取字体默认样式
       this.style.color = text.style.fill
+    },
+    translation (val) {
+      let url = '//openapi.youdao.com/api?q=' + this.translate.q +
+          '&appKey=' + this.translate.appKey +
+          '&salt=' + this.translate.salt +
+          '&from=' + this.translate.from +
+          '&to=' + val +
+          '&sign=' + this.$md5(this.translate.appKey + this.translate.q + this.translate.salt + this.translate.secret_key)
+
+      jsonp(url, null, (e, res) => {
+        if (res.translation <= 0) {
+          this.$Message.error('没有查询到翻译')
+          return
+        }
+        let text = res.translation[0]
+        this.tableValue[0].text = text
+      })
     },
     renderW (width) {
       el.style.width = width
