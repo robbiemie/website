@@ -115,7 +115,14 @@
           </Row>
           <Table :columns="base.tabelHeader" :data="tableValue"></Table>
         </TabPane>
-        <TabPane label="导出" name="name3">标签三的内容</TabPane>
+        <TabPane label="小惊喜" name="name3">
+          <Row>
+            打赏主播
+          </Row>
+          <Row>
+            <img src="~@/img/money.png" style="width:300px;height:400px;" />
+          </Row>
+        </TabPane>
       </Tabs>
     </div>
   </div>
