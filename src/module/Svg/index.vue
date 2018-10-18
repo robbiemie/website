@@ -7,7 +7,7 @@
         <svg id="svg" xmlns="http://www.w3.org/2000/svg" version="1.1">
           <!-- 三次贝塞尔曲线 -->
           <path id="myPath" :d="base.d" :stroke-dasharray="base.dasharray" stroke="transparent" fill="transparent"/>
-          <text id="text" font-family="Verdana" :font-size="style.fontSize"  text-anchor="middle" style="fill:#000;" >
+          <text id="text" font-family="Verdana" :stroke="style.strokeColor" :stroke-width="style.strokeWidth" :font-size="style.fontSize" :letter-spacing="style.letters" :word-spacing="style.words"  text-anchor="middle" style="fill:#000;" >
             <textPath xlink:href="#myPath" startOffset="50%">
               {{tableValue[0] && tableValue[0].text}}
             </textPath>
@@ -54,7 +54,35 @@
         <TabPane label="基础样式" name="base">
           <Row>
             宽度: <InputNumber v-model="base.w" @on-change="renderW" placeholder="width" style="width: 80px"></InputNumber>
+            <Progress :percent="base.w | getPercentw" style="marginLeft:10px;width: 150px"/>
+            <ButtonGroup>
+                <Button icon="ios-add" @click="addpercent('w')"></Button>
+                <Button icon="ios-remove" @click="minuspercent('w')"></Button>
+            </ButtonGroup>
+          </Row>
+          <Row>
             高度: <InputNumber v-model="base.h" @on-change="renderH" placeholder="height" style="width: 80px"></InputNumber>
+            <Progress :percent="base.h | getPercenth" style="marginLeft:10px;width: 150px"/>
+            <ButtonGroup>
+                <Button icon="ios-add" @click="addpercent('h')"></Button>
+                <Button icon="ios-remove" @click="minuspercent('h')"></Button>
+            </ButtonGroup>
+          </Row>
+          <Row>
+            垂直位移: <InputNumber v-model="base.verH" @on-change="renderVerH" placeholder="height" style="width: 80px"></InputNumber>
+            <Progress :percent="base.verH | getPercenth" style="marginLeft:10px;width: 150px"/>
+            <ButtonGroup>
+                <Button icon="ios-add" @click="addVerh()"></Button>
+                <Button icon="ios-remove" @click="minusVerh()"></Button>
+            </ButtonGroup>
+          </Row>
+          <Row>
+            字符间距:<InputNumber v-model="style.letters" @on-change="changeLetters" placeholder="width" style="width: 80px;marginRight:10px;"></InputNumber>
+            单词间距:<InputNumber v-model="style.words" @on-change="changeWords" placeholder="width" style="width: 80px"></InputNumber>
+          </Row>
+          <Row>
+            描边宽度:<InputNumber v-model="style.strokeWidth" @on-change="changeStrokeWidth" placeholder="width" style="width: 80px;marginRight:10px;"></InputNumber>
+            描边颜色:<ColorPicker v-model="style.strokeColor" @on-active-change="changeStrokeColor" />
           </Row>
           <Row>
             显示辅助线:
@@ -83,7 +111,7 @@
         </TabPane>
         <TabPane label="多语言配置" name="multiLanguage">
           <Row>
-            请填写英文翻译稿: <Input v-model="translate.origin" style="width: auto" placeholder="large size" />
+            请填写英文翻译稿: <Input v-model="translate.q" style="width: auto" placeholder="large size" />
           </Row>
           <Table :columns="base.tabelHeader" :data="tableValue"></Table>
         </TabPane>
@@ -104,6 +132,9 @@ let el = null
 let path = null
 let text = null
 let isClicked = false
+const maxw = 1200
+const maxh = 600
+const maxVerh = 200
 
 export default {
   name: 'svg',
@@ -112,6 +143,9 @@ export default {
       base: {
         w: 0,
         h: 0,
+        verH: 0,
+        percentw: 0,
+        percenth: 0,
         split: 0.5,
         d: 'M0 100 C 270 0, 540 0, 810 100',
         dasharray: '0',
@@ -123,10 +157,14 @@ export default {
         fontSize: 20,
         fontFamily: 'Arial',
         color: '#000',
+        letters: 0, // 字符间距
+        words: 0, // 单词间距
+        strokeWidth: 0, // 描边宽度
+        strokeColor: '#000', // 描边颜色
         dasharray: '0'
       },
       translate: {
-        q: 'hello', // 需要翻译的文本
+        q: '', // 需要翻译的文本
         from: 'EN', // 源语言
         to: 'zh-CHS', // 目标语言
         appKey: '0f9fe3ae8208b31e', // 应用 ID
@@ -143,13 +181,24 @@ export default {
   mounted () {
     this.init()
   },
+  filters: {
+    getPercentw (val) {
+      return parseInt((val / maxw).toFixed(2) * 100)
+    },
+    getPercenth (val) {
+      return parseInt((val / maxh).toFixed(2) * 100)
+    },
+    getVerh (val) {
+      return parseInt((val / maxVerh).toFixed(2) * 100)
+    }
+  },
   methods: {
     init () {
+      this.tableValue.push(defaultVal())
       el = query('#svg')
       path = query('#myPath')
       text = query('#text')
 
-      this.tableValue.push(defaultVal())
       const svg = el.getBoundingClientRect()
       this.base.w = svg.width
       this.base.h = svg.height
@@ -165,25 +214,79 @@ export default {
           '&sign=' + this.$md5(this.translate.appKey + this.translate.q + this.translate.salt + this.translate.secret_key)
 
       jsonp(url, null, (e, res) => {
-        if (res.translation <= 0) {
-          this.$Message.error('没有查询到翻译')
+        if (!res.translation || res.translation.length <= 0) {
+          this.$Message.error('没有查询到翻译', res.errorCode)
           return
         }
         let text = res.translation[0]
         this.tableValue[0].text = text
       })
     },
+    addVerh (type) {
+      this.renderVerH(this.base.verH += 10)
+    },
+    minusVerh (type) {
+      this.renderVerH(this.base.verH -= 10)
+    },
+    addpercent (type) {
+      if (type === 'w') {
+        this.renderW(this.base.w + 100)
+      } else {
+        this.renderH(this.base.h + 100)
+      }
+    },
+    minuspercent (type) {
+      if (type === 'w') {
+        this.renderW(this.base.w - 100)
+      } else {
+        this.renderH(this.base.h - 100)
+      }
+    },
+    changeStrokeWidth (val) {
+      this.style.strokeWidth = val
+    },
+    changeStrokeColor (val) {
+      this.style.strokeColor = val
+    },
+    changeLetters (val) {
+      this.style.letters = val
+    },
+    changeWords (val) {
+      this.style.words = val
+    },
     renderW (width) {
-      el.style.width = width
+      if (width > 1200) {
+        this.$Message.error('最大宽度不得超过1200px')
+        this.base.w = width = 1200
+      }
+      if (width <= 10) {
+        this.$Message.error('最大宽度不得少于10px')
+        this.base.w = width = 10
+      }
+      this.base.w = el.style.width = width
       let list = this.base.d.split(' ')
       list[3] = parseInt(width / 3)
       list[5] = parseInt(width / 3 * 2)
       list[7] = width
       this.base.d = list.join(' ')
     },
-    renderH (height) {
-      el.style.height = height
+    renderVerH (val) {
       let list = this.base.d.split(' ')
+      list[4] = list[6] = val
+      this.base.d = list.join(' ')
+    },
+    renderH (height) {
+      if (height > 600) {
+        this.$Message.error('最大高度不得超过600px')
+        this.base.h = height = 600
+      }
+      if (height <= 10) {
+        this.$Message.error('最大高度不得少于10px')
+        this.base.h = height = 10
+      }
+      this.base.h = el.style.height = height
+      let list = this.base.d.split(' ')
+      console.log('list', list)
       list[8] = list[1] = parseInt(height / 2)
       this.base.d = list.join(' ')
     },
@@ -294,7 +397,7 @@ export default {
     }
   }
   &__content {
-    flex: 3;
+    margin: 0 auto;
   }
   &__tools {
     flex: 1;

@@ -85,7 +85,7 @@ export const tabelHeader = function () {
         return <i-option value={item.code} >{item.name}</i-option>
       })
       return (
-        <i-select value={this.tableValue[index].lang} on-on-change={ (v) => { this.tableValue[index].lang = v; this.translation(v) }}>
+        <i-select value={this.tableValue[0].lang} on-on-change={ (v) => { this.tableValue[0].lang = v; this.translation(v) }}>
           {renderOption}
         </i-select>
       )
@@ -95,9 +95,9 @@ export const tabelHeader = function () {
     key: 'text',
     align: 'center',
     render: (h, { row, index }) => {
-      row.text = this.translate.origin
+      row.text = this.translate.q
       return (
-        <i-input value={this.translate.origin} disabled placeholder="输入文本" clearable style="width: 130px" />
+        <i-input value={this.translate.q} disabled placeholder="输入文本" clearable style="width: 130px" />
       )
     }
   }, {
@@ -112,7 +112,6 @@ export const tabelHeader = function () {
         },
         on: {
           click: (e) => {
-            // console.log('a', row)
             this.tableValue[index].text = row.text
           }
         }
@@ -129,7 +128,7 @@ export const tabelHeader = function () {
 export const defaultVal = function () {
   return Object.assign({}, {
     lang: 'EN',
-    text: ''
+    text: 'hello world'
   })
 }
 
