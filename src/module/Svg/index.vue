@@ -8,20 +8,20 @@
           <!-- 二次贝塞尔曲线 -->
           <defs>
               <g id="groupText">
-                <filter id="textFilter">
+                <filter id="textFilter" v-if="advance.isShow">
                   <feGaussianBlur in="SourceGraphic" :stdDeviation="advance.blur"/>
                 </filter>
                 <path id="myPath" :d="base.d" :stroke-dasharray="base.dasharray" stroke="transparent" fill="transparent"/>
-                <text id="text" filter="url(#textFilter)" font-family="Verdana" :stroke="style.strokeColor"
+                <text id="text" :filter="getTextFilter" font-family="Verdana" :stroke="style.strokeColor"
                   :stroke-width="style.strokeWidth" :font-size="style.fontSize"
                   :letter-spacing="style.letters" :word-spacing="style.words"
-                  text-anchor="middle" fill="url(#textColor)" >
+                  text-anchor="middle" :fill="getTextFill" >
                   <textPath xlink:href="#myPath" startOffset="50%">
                     {{tableValue[0] && tableValue[0].text}}
                   </textPath>
                 </text>
               </g>
-              <g id="gounpColor">
+              <g id="groupColor"  v-if="advance.isShow">
                 <linearGradient id="textColor">
                   <stop :offset="`${advance.frontPercent}%`" :stop-color="advance.frontColor" />
                   <stop :offset="`${advance.backPercent}%`" :stop-color="advance.backColor" />
@@ -131,16 +131,18 @@
           <Divider />
             <Row>
               <Tag color="#FFA2D3" type="border">高级特性</Tag>
+              <i-switch v-model="advance.isShow" @on-change="changeAdvanceVisible"></i-switch>
             </Row>
-            <div>
-              渐变色
-              <Row>
-                  F/B比例(%): <InputNumber v-model="advance.frontPercent" @on-change="changeFrontPercent" placeholder="width" style="width: 80px"></InputNumber>
-                  前景色: <ColorPicker v-model="advance.frontColor" @on-active-change="changeAdvanceFColor" />
-                  后景色: <ColorPicker v-model="advance.backColor" @on-active-change="changeAdvanceBColor" />
-              </Row>
+            <div v-if="advance.isShow">
               <Row>
                 模糊度: <InputNumber v-model="advance.blur" :step="0.1" @on-change="changeAdvanceBlur" placeholder="blur" style="width: 80px"></InputNumber>
+              </Row>
+              <Row>
+                  F/B比例(%): <InputNumber v-model="advance.frontPercent" @on-change="changeFrontPercent" placeholder="width" style="width: 80px"></InputNumber>
+              </Row>
+              <Row>
+                前景色: <ColorPicker v-model="advance.frontColor" @on-active-change="changeAdvanceFColor" />
+                后景色: <ColorPicker v-model="advance.backColor" @on-active-change="changeAdvanceBColor" />
               </Row>
             </div>
         </TabPane>
@@ -206,6 +208,7 @@ export default {
         dasharray: '0'
       },
       advance: {
+        isShow: false,
         frontPercent: 5,
         frontColor: '#000', // 前景色
         backPercent: 95,
@@ -225,6 +228,14 @@ export default {
       svgCSS: null,
       isquerySource: false,
       tableValue: []
+    }
+  },
+  computed: {
+    getTextFill (val) {
+      return this.advance.isShow ? 'url(#textColor)' : this.style.color
+    },
+    getTextFilter (val) {
+      return this.advance.isShow ? 'url(#textFilter)' : ''
     }
   },
   mounted () {
@@ -251,8 +262,6 @@ export default {
       const svg = el.getBoundingClientRect()
       this.base.w = svg.width
       this.base.h = svg.height
-      // 获取字体默认样式
-      this.style.color = text.style.fill
     },
     translation (val) {
       let url = '//openapi.youdao.com/api?q=' + this.translate.q +
@@ -350,6 +359,9 @@ export default {
     // 显示虚实线
     changeDasharray (val) {
       this.base.dasharray = val
+    },
+    changeAdvanceVisible (val) {
+      this.advance.isShow = val
     },
     // 调整模糊度
     changeAdvanceBlur (val) {
