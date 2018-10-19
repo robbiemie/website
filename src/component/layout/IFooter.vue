@@ -29,11 +29,9 @@ export default {
 
 @keyframes hoverBtn {
   0% {
-    transform: translateY(0);
   }
   30% {
     opacity: 1;
-    transform: translateY(-20px);
   }
   50% {
     background-color: #fff;
@@ -41,8 +39,8 @@ export default {
   100% {
     opacity: 0.8;
     transform: translateY(0);
-    box-shadow: 0 0 50px 10px #fffff5;
-    background-color: #fff;
+    box-shadow: 0 0 2px 2px #fffff5;
+    background-color: #fffff5;
   }
 }
 
@@ -59,7 +57,7 @@ export default {
   &-item {
     position: relative;
     flex: 1;
-    height: 100%;
+    height: 100px;
     display: inline-block;
     line-height: 100px;
     text-align: center;
@@ -71,7 +69,7 @@ export default {
     // font-family: Georgia,sans-serif, serif;
     color: #fff;
     // border: 3px solid #fff;
-    border-radius: 100px;
+    border-radius: 20px;
     background-color: rgba(112, 112, 112, 0.3);
     .mask {
       position: absolute;
