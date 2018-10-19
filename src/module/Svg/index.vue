@@ -1,6 +1,9 @@
 <template>
 <div>
   <div class="svg__header">SVG艺术字体<span class="svg__header--desc">一个在线生成svg艺术字体的工具</span></div>
+  <a class="svg__github--url" href="https://github.com/yang657850144/website">
+    Github <img class="svg__github" style="width:34px;height:34px;" src="https://makefriends.bs2dl.yy.com/bm1539174882949.png" />
+  </a>
   <div class="svg">
     <div class="svg__content">
       <div class="svg__wrapper">
@@ -460,6 +463,23 @@ export default {
 .svg {
   padding: 20px;
   display: flex;
+  &__github {
+    margin: 0 10px;
+    width: 30px;
+    height: 30px;
+    &--url{
+      padding: 2px 10px;
+      position: fixed;
+      display: flex;
+      align-items: center;
+      top: 10px;
+      right: 10px;
+      color:#000;
+      font-weight: bold;
+      border: 1px solid #000;
+      border-radius: 30px;
+    }
+  }
   &__header {
     height: 100px;
     text-align: center;
