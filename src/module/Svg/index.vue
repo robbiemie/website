@@ -5,13 +5,30 @@
     <div class="svg__content">
       <div class="svg__wrapper">
         <svg id="svg" xmlns="http://www.w3.org/2000/svg" version="1.1">
-          <!-- 三次贝塞尔曲线 -->
-          <path id="myPath" :d="base.d" :stroke-dasharray="base.dasharray" stroke="transparent" fill="transparent"/>
-          <text id="text" font-family="Verdana" :stroke="style.strokeColor" :stroke-width="style.strokeWidth" :font-size="style.fontSize" :letter-spacing="style.letters" :word-spacing="style.words"  text-anchor="middle" style="fill:#000;" >
-            <textPath xlink:href="#myPath" startOffset="50%">
-              {{tableValue[0] && tableValue[0].text}}
-            </textPath>
-          </text>
+          <!-- 二次贝塞尔曲线 -->
+          <defs>
+              <g id="groupText">
+                <filter id="textFilter">
+                  <feGaussianBlur in="SourceGraphic" :stdDeviation="advance.blur"/>
+                </filter>
+                <path id="myPath" :d="base.d" :stroke-dasharray="base.dasharray" stroke="transparent" fill="transparent"/>
+                <text id="text" filter="url(#textFilter)" font-family="Verdana" :stroke="style.strokeColor"
+                  :stroke-width="style.strokeWidth" :font-size="style.fontSize"
+                  :letter-spacing="style.letters" :word-spacing="style.words"
+                  text-anchor="middle" fill="url(#textColor)" >
+                  <textPath xlink:href="#myPath" startOffset="50%">
+                    {{tableValue[0] && tableValue[0].text}}
+                  </textPath>
+                </text>
+              </g>
+              <g id="gounpColor">
+                <linearGradient id="textColor">
+                  <stop :offset="`${advance.frontPercent}%`" :stop-color="advance.frontColor" />
+                  <stop :offset="`${advance.backPercent}%`" :stop-color="advance.backColor" />
+                </linearGradient>
+              </g>
+          </defs>
+          <use xlink:href="#groupText"/>
         </svg>
       </div>
       <Divider />
@@ -53,6 +70,9 @@
       <Tabs class="svg__tabs" style="minHeight:500px;">
         <TabPane label="基础样式" name="base">
           <Row>
+            <Tag type="border">基础特性</Tag>
+          </Row>
+          <Row>
             宽度: <InputNumber v-model="base.w" @on-change="renderW" placeholder="width" style="width: 80px"></InputNumber>
             <Progress :percent="base.w | getPercentw" style="marginLeft:10px;width: 150px"/>
             <ButtonGroup>
@@ -69,11 +89,11 @@
             </ButtonGroup>
           </Row>
           <Row>
-            垂直位移: <InputNumber v-model="base.verH" @on-change="renderVerH" placeholder="height" style="width: 80px"></InputNumber>
+            调整弧度: <InputNumber v-model="base.verH" @on-change="renderVerH" placeholder="height" style="width: 80px"></InputNumber>
             <Progress :percent="base.verH | getPercenth" style="marginLeft:10px;width: 150px"/>
             <ButtonGroup>
-                <Button icon="ios-add" @click="addVerh()"></Button>
-                <Button icon="ios-remove" @click="minusVerh()"></Button>
+                <Button icon="ios-add" @click="minusVerh()"></Button>
+                <Button icon="ios-remove" @click="addVerh()"></Button>
             </ButtonGroup>
           </Row>
           <Row>
@@ -108,6 +128,21 @@
             字体大小: <InputNumber v-model="style.fontSize" @on-change="changeFontSize" placeholder="width" style="width: 80px"></InputNumber>
             字体颜色: <ColorPicker v-model="style.color" @on-active-change="changeFontColor" />
           </Row>
+          <Divider />
+            <Row>
+              <Tag color="#FFA2D3" type="border">高级特性</Tag>
+            </Row>
+            <div>
+              渐变色
+              <Row>
+                  F/B比例(%): <InputNumber v-model="advance.frontPercent" @on-change="changeFrontPercent" placeholder="width" style="width: 80px"></InputNumber>
+                  前景色: <ColorPicker v-model="advance.frontColor" @on-active-change="changeAdvanceFColor" />
+                  后景色: <ColorPicker v-model="advance.backColor" @on-active-change="changeAdvanceBColor" />
+              </Row>
+              <Row>
+                模糊度: <InputNumber v-model="advance.blur" :step="0.1" @on-change="changeAdvanceBlur" placeholder="blur" style="width: 80px"></InputNumber>
+              </Row>
+            </div>
         </TabPane>
         <TabPane label="多语言配置" name="multiLanguage">
           <Row>
@@ -161,7 +196,7 @@ export default {
       },
       style: {
         isShowStroke: '0',
-        fontSize: 20,
+        fontSize: 28,
         fontFamily: 'Arial',
         color: '#000',
         letters: 0, // 字符间距
@@ -169,6 +204,13 @@ export default {
         strokeWidth: 0, // 描边宽度
         strokeColor: '#000', // 描边颜色
         dasharray: '0'
+      },
+      advance: {
+        frontPercent: 5,
+        frontColor: '#000', // 前景色
+        backPercent: 95,
+        backColor: '#000', // 后景色
+        blur: 0 // 模糊度
       },
       translate: {
         q: '', // 需要翻译的文本
@@ -308,6 +350,23 @@ export default {
     // 显示虚实线
     changeDasharray (val) {
       this.base.dasharray = val
+    },
+    // 调整模糊度
+    changeAdvanceBlur (val) {
+      this.advance.blur = val
+    },
+    // 修改前景色比例
+    changeFrontPercent (val) {
+      this.advance.frontPercent = val
+      this.advance.backPercent = 100 - val
+    },
+    // 修改前景色
+    changeAdvanceFColor (val) {
+      this.advance.frontColor = val
+    },
+    // 修改后景色
+    changeAdvanceBColor (val) {
+      this.advance.backColor = val
     },
     // 修改字体大小
     changeFontSize (val) {
