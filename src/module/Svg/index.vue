@@ -11,7 +11,7 @@ fec<template>
           <!-- 二次贝塞尔曲线 -->
           <defs>
               <g id="groupText">
-                <filter id="textFilter" v-if="advance.isShow">
+                <filter id="textFilter" v-if="advance.isShow && advance.isChangeBlur">
                   <feGaussianBlur in="SourceGraphic" :stdDeviation="advance.blur"/>
                 </filter>
                 <path id="myPath" :d="base.d" :stroke-dasharray="base.dasharray" stroke="transparent" fill="transparent"/>
@@ -134,16 +134,23 @@ fec<template>
           </Row>
           <Row>
             字体大小: <InputNumber v-model="style.fontSize" @on-change="changeFontSize" placeholder="width" style="width: 80px"></InputNumber>
-            字体颜色: <ColorPicker v-model="style.color" @on-active-change="changeFontColor" />
+            <span v-if="!advance.isShow">字体颜色: <ColorPicker v-model="style.color" @on-active-change="changeFontColor" /></span>
           </Row>
           <Divider />
             <Row>
-              <Tag color="#FFA2D3" type="border">高级特性</Tag>
+              <Tag color="#FFA2D3" type="border">高级特性 (实验)</Tag>
               <i-switch v-model="advance.isShow" @on-change="changeAdvanceVisible"></i-switch>
             </Row>
             <div v-if="advance.isShow">
               <Row>
-                模糊度: <InputNumber v-model="advance.blur" :step="0.1" @on-change="changeAdvanceBlur" placeholder="blur" style="width: 80px"></InputNumber>
+                3D效果:
+                <RadioGroup v-model="advance.isShowD3" @on-change="changeAdvanceD3">
+                    <Radio label="1">开启</Radio>
+                    <Radio label="-1">关闭</Radio>
+                </RadioGroup>
+              </Row>
+              <Row>
+                模糊度 : <InputNumber v-model="advance.blur" :step="0.1" @on-change="changeAdvanceBlur" placeholder="blur" style="width: 100px"></InputNumber>
               </Row>
               <Row>
                   F/B比例(%): <InputNumber v-model="advance.frontPercent" @on-change="changeFrontPercent" placeholder="width" style="width: 80px"></InputNumber>
@@ -222,7 +229,9 @@ export default {
         frontColor: '#000', // 前景色
         backPercent: 95,
         backColor: '#000', // 后景色
-        blur: 0 // 模糊度
+        blur: 0, // 模糊度
+        isChangeBlur: false,
+        isShowD3: '-1'
       },
       translate: {
         q: '', // 需要翻译的文本
@@ -240,8 +249,13 @@ export default {
     }
   },
   computed: {
-    getTextFill (val) {
-      return this.advance.isShow ? 'url(#textColor)' : this.style.color
+    getTextFill () {
+      let val = ''
+      if (this.advance.isShow) {
+        val = 'url(#textColor)'
+        el && (el.style.fill = '')
+      }
+      return val
     },
     getTextFilter (val) {
       return this.advance.isShow ? 'url(#textFilter)' : ''
@@ -357,6 +371,31 @@ export default {
       list[8] = list[1] = parseInt(height / 2)
       this.base.d = list.join(' ')
     },
+    changeAdvanceD3 (val) {
+      this.advance.isShowD3 = `${val}`
+      if (val === '1') { this.addTextShadow() } else {
+        this.removeTextShadow()
+      }
+    },
+    addTextShadow () {
+      el.style.textShadow =
+        `0 1px 0 #ccc,
+        0 2px 0 #c9c9c9,
+        0 3px 0 #bbb,
+        0 4px 0 #b9b9b9,
+        0 5px 0 #aaa,
+        0 6px 1px rgba(0,0,0,.1),
+        0 0 5px rgba(0,0,0,.1),
+        0 1px 3px rgba(0,0,0,.3),
+        0 3px 5px rgba(0,0,0,.2),
+        0 5px 10px rgba(0,0,0,.25),
+        0 10px 10px rgba(0,0,0,.2),
+        0 20px 20px rgba(0,0,0,.15)`
+    },
+    removeTextShadow () {
+      this.advance.isShowD3 = '-1'
+      el.style.textShadow = ''
+    },
     // 显示贝塞尔曲线
     changeStroke (val) {
       if (+val === 0) {
@@ -371,9 +410,11 @@ export default {
     },
     changeAdvanceVisible (val) {
       this.advance.isShow = val
+      this.removeTextShadow()
     },
     // 调整模糊度
     changeAdvanceBlur (val) {
+      this.advance.isChangeBlur = true
       this.advance.blur = val
     },
     // 修改前景色比例
@@ -399,7 +440,7 @@ export default {
     },
     // 修改文字颜色
     changeFontColor (val) {
-      this.style.color = text.style.fill = val
+      text.style.fill = val
     },
     // 查看源码
     querySource () {
@@ -523,7 +564,7 @@ export default {
   margin: 10px 0;
 }
 
-svg {
+#svg {
     margin: 0;
     padding: 0;
     width: 800px;
