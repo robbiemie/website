@@ -1,4 +1,4 @@
-<template>
+fec<template>
 <div>
   <div class="svg__header">SVG艺术字体<span class="svg__header--desc">一个在线生成svg艺术字体的工具</span></div>
   <a class="svg__github--url" href="https://github.com/yang657850144/website">
@@ -15,7 +15,7 @@
                   <feGaussianBlur in="SourceGraphic" :stdDeviation="advance.blur"/>
                 </filter>
                 <path id="myPath" :d="base.d" :stroke-dasharray="base.dasharray" stroke="transparent" fill="transparent"/>
-                <text id="text" :filter="getTextFilter" font-family="Verdana" :stroke="style.strokeColor"
+                <text id="text" :filter="getTextFilter" :font-weight="style.fontWeight" font-family="Verdana" :stroke="style.strokeColor"
                   :stroke-width="style.strokeWidth" :font-size="style.fontSize"
                   :letter-spacing="style.letters" :word-spacing="style.words"
                   text-anchor="middle" :fill="getTextFill" >
@@ -123,8 +123,13 @@
           </Row>
           <Row>
             字体样式:
-            <Select v-model="style.fontFamily" style="width:200px" @on-change="changeFontFamily" placement="bottom">
+            <Select v-model="style.fontFamily" style="width:80px" @on-change="changeFontFamily" placement="bottom" >
               <Option v-for="item in base.fontFamily" :value="item.label" :key="item.value">{{ item.label }}</Option>
+            </Select>
+            字体加粗:
+            <Select v-model="style.fontWeight" style="width:58px">
+              <Option value="bold">是</Option>
+              <Option value="normal">否</Option>
             </Select>
           </Row>
           <Row>
@@ -204,6 +209,7 @@ export default {
         fontSize: 28,
         fontFamily: 'Arial',
         color: '#000',
+        fontWeight: 'normal',
         letters: 0, // 字符间距
         words: 0, // 单词间距
         strokeWidth: 0, // 描边宽度
