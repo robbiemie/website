@@ -1,6 +1,9 @@
-<template>
+fec<template>
 <div>
   <div class="svg__header">SVG艺术字体<span class="svg__header--desc">一个在线生成svg艺术字体的工具</span></div>
+  <a class="svg__github--url" href="https://github.com/yang657850144/website">
+    Github <img class="svg__github" style="width:34px;height:34px;" src="https://makefriends.bs2dl.yy.com/bm1539174882949.png" />
+  </a>
   <div class="svg">
     <div class="svg__content">
       <div class="svg__wrapper">
@@ -8,11 +11,11 @@
           <!-- 二次贝塞尔曲线 -->
           <defs>
               <g id="groupText">
-                <filter id="textFilter" v-if="advance.isShow">
+                <filter id="textFilter" v-if="advance.isShow && advance.isChangeBlur">
                   <feGaussianBlur in="SourceGraphic" :stdDeviation="advance.blur"/>
                 </filter>
                 <path id="myPath" :d="base.d" :stroke-dasharray="base.dasharray" stroke="transparent" fill="transparent"/>
-                <text id="text" :filter="getTextFilter" font-family="Verdana" :stroke="style.strokeColor"
+                <text id="text" :filter="getTextFilter" :font-weight="style.fontWeight" font-family="Verdana" :stroke="style.strokeColor"
                   :stroke-width="style.strokeWidth" :font-size="style.fontSize"
                   :letter-spacing="style.letters" :word-spacing="style.words"
                   text-anchor="middle" :fill="getTextFill" >
@@ -120,22 +123,34 @@
           </Row>
           <Row>
             字体样式:
-            <Select v-model="style.fontFamily" style="width:200px" @on-change="changeFontFamily" placement="bottom">
+            <Select v-model="style.fontFamily" style="width:80px" @on-change="changeFontFamily" placement="bottom" >
               <Option v-for="item in base.fontFamily" :value="item.label" :key="item.value">{{ item.label }}</Option>
+            </Select>
+            字体加粗:
+            <Select v-model="style.fontWeight" style="width:58px">
+              <Option value="bold">是</Option>
+              <Option value="normal">否</Option>
             </Select>
           </Row>
           <Row>
             字体大小: <InputNumber v-model="style.fontSize" @on-change="changeFontSize" placeholder="width" style="width: 80px"></InputNumber>
-            字体颜色: <ColorPicker v-model="style.color" @on-active-change="changeFontColor" />
+            <span v-if="!advance.isShow">字体颜色: <ColorPicker v-model="style.color" @on-active-change="changeFontColor" /></span>
           </Row>
           <Divider />
             <Row>
-              <Tag color="#FFA2D3" type="border">高级特性</Tag>
+              <Tag color="#FFA2D3" type="border">高级特性 (实验)</Tag>
               <i-switch v-model="advance.isShow" @on-change="changeAdvanceVisible"></i-switch>
             </Row>
             <div v-if="advance.isShow">
               <Row>
-                模糊度: <InputNumber v-model="advance.blur" :step="0.1" @on-change="changeAdvanceBlur" placeholder="blur" style="width: 80px"></InputNumber>
+                3D效果:
+                <RadioGroup v-model="advance.isShowD3" @on-change="changeAdvanceD3">
+                    <Radio label="1">开启</Radio>
+                    <Radio label="-1">关闭</Radio>
+                </RadioGroup>
+              </Row>
+              <Row>
+                模糊度 : <InputNumber v-model="advance.blur" :step="0.1" @on-change="changeAdvanceBlur" placeholder="blur" style="width: 100px"></InputNumber>
               </Row>
               <Row>
                   F/B比例(%): <InputNumber v-model="advance.frontPercent" @on-change="changeFrontPercent" placeholder="width" style="width: 80px"></InputNumber>
@@ -201,6 +216,7 @@ export default {
         fontSize: 28,
         fontFamily: 'Arial',
         color: '#000',
+        fontWeight: 'normal',
         letters: 0, // 字符间距
         words: 0, // 单词间距
         strokeWidth: 0, // 描边宽度
@@ -213,7 +229,9 @@ export default {
         frontColor: '#000', // 前景色
         backPercent: 95,
         backColor: '#000', // 后景色
-        blur: 0 // 模糊度
+        blur: 0, // 模糊度
+        isChangeBlur: false,
+        isShowD3: '-1'
       },
       translate: {
         q: '', // 需要翻译的文本
@@ -231,8 +249,13 @@ export default {
     }
   },
   computed: {
-    getTextFill (val) {
-      return this.advance.isShow ? 'url(#textColor)' : this.style.color
+    getTextFill () {
+      let val = ''
+      if (this.advance.isShow) {
+        val = 'url(#textColor)'
+        el && (el.style.fill = '')
+      }
+      return val
     },
     getTextFilter (val) {
       return this.advance.isShow ? 'url(#textFilter)' : ''
@@ -348,6 +371,31 @@ export default {
       list[8] = list[1] = parseInt(height / 2)
       this.base.d = list.join(' ')
     },
+    changeAdvanceD3 (val) {
+      this.advance.isShowD3 = `${val}`
+      if (val === '1') { this.addTextShadow() } else {
+        this.removeTextShadow()
+      }
+    },
+    addTextShadow () {
+      el.style.textShadow =
+        `0 1px 0 #ccc,
+        0 2px 0 #c9c9c9,
+        0 3px 0 #bbb,
+        0 4px 0 #b9b9b9,
+        0 5px 0 #aaa,
+        0 6px 1px rgba(0,0,0,.1),
+        0 0 5px rgba(0,0,0,.1),
+        0 1px 3px rgba(0,0,0,.3),
+        0 3px 5px rgba(0,0,0,.2),
+        0 5px 10px rgba(0,0,0,.25),
+        0 10px 10px rgba(0,0,0,.2),
+        0 20px 20px rgba(0,0,0,.15)`
+    },
+    removeTextShadow () {
+      this.advance.isShowD3 = '-1'
+      el.style.textShadow = ''
+    },
     // 显示贝塞尔曲线
     changeStroke (val) {
       if (+val === 0) {
@@ -362,9 +410,11 @@ export default {
     },
     changeAdvanceVisible (val) {
       this.advance.isShow = val
+      this.removeTextShadow()
     },
     // 调整模糊度
     changeAdvanceBlur (val) {
+      this.advance.isChangeBlur = true
       this.advance.blur = val
     },
     // 修改前景色比例
@@ -390,7 +440,7 @@ export default {
     },
     // 修改文字颜色
     changeFontColor (val) {
-      this.style.color = text.style.fill = val
+      text.style.fill = val
     },
     // 查看源码
     querySource () {
@@ -460,6 +510,23 @@ export default {
 .svg {
   padding: 20px;
   display: flex;
+  &__github {
+    margin: 0 10px;
+    width: 30px;
+    height: 30px;
+    &--url{
+      padding: 2px 10px;
+      position: fixed;
+      display: flex;
+      align-items: center;
+      top: 10px;
+      right: 10px;
+      color:#000;
+      font-weight: bold;
+      border: 1px solid #000;
+      border-radius: 30px;
+    }
+  }
   &__header {
     height: 100px;
     text-align: center;
@@ -497,7 +564,7 @@ export default {
   margin: 10px 0;
 }
 
-svg {
+#svg {
     margin: 0;
     padding: 0;
     width: 800px;
