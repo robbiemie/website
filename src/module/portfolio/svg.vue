@@ -1,4 +1,4 @@
-fec<template>
+<template>
 <div>
   <div class="svg__header">SVG艺术字体<span class="svg__header--desc">一个在线生成svg艺术字体的工具</span></div>
   <a class="svg__github--url" href="https://github.com/yang657850144/website">

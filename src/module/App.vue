@@ -30,6 +30,7 @@ export default {
 
 <style lang="scss">
 @import '~@/css/index';
+
 .page {
   position: relative;
   overflow: hidden;

@@ -5,8 +5,6 @@
 @import "common/base";
 @import "common/acss";
 @import "common/common";
-// 导入谷歌字体样式
-@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
 
 html, body {
     background: #000;
@@ -25,8 +23,8 @@ body {
 .page {
     width: 100%;
     height: 100%;
-    font-family: 'PingFanf SC', 'Avenir', Helvetica, Arial, sans-serif;
+    color: #2c3e50;
+    font-family: Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #2c3e50;
 }

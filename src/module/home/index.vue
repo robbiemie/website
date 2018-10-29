@@ -78,7 +78,9 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~@/css/index';
+// 导入谷歌字体样式
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+
 @keyframes scaleArrow {
   to {
     opacity: 0.8;
