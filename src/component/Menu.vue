@@ -11,7 +11,7 @@
     <div class="section2__menu">
       <div class="section2__item section2__item1">
         <div class="section2__item--common section2__item--icon"><div class="section2__item--icon1"></div></div>
-        <div class="section2__item--common section2__item--text"><router-link to="/design">Design</router-link></div>
+        <div class="section2__item--common section2__item--text"><router-link to="/">Home</router-link></div>
       </div>
       <div class="section2__item section2__item2">
         <div class="section2__item--common section2__item--icon"><div class="section2__item--icon2"></div></div>
@@ -36,17 +36,44 @@
 
 @keyframes flash {
   to {
-    opacity: 1;
+    transform: scale(1);
     box-shadow: 0 0 50px rgb(33, 216, 16);
   }
 }
 
 .section2 {
+  &__svg{
+    position: absolute;
+    right: 0;
+    top: calc(50% - 400px);
+    font-size: 24px;
+    color: #fff;
+    font-family:Arial, Helvetica, sans-serif;
+    &--cell {
+      fill: none;
+      stroke: none;
+      width: 400px;
+      height: 800px;
+    }
+    &--path {
+      fill: #52a7ce;
+      d: path('M200,0 C 200,50  200,50 180,100 Q 160,150 160,200 Q 160,250 180,300 C 200,350 200,350 200,400');
+      transition: d 0.8s cubic-bezier(0.85, 0.21, 0.165, 0.78);
+    }
+  }
+  &__svg:hover &__svg--path{
+    d: path('M200,0 C 200,50  200,50 130,100 Q 60,150 60,200 Q 60,250 130,300 C 200,350 200,350 200,400');
+    transition: d 0.8s cubic-bezier(0.85, 0.21, 0.165, 0.78);
+  }
+  &__svg:hover &__menu {
+    transform: translateX(0px);
+    transition: transform 1.4s ease;
+  }
   &__point {
     position: absolute;
     right: 20px;
     top: calc(50% - 10px);
-    border: 4px solid rgb(214, 129, 214);
+    border: 0px solid rgb(214, 129, 214);
     background-color: transparent;
     width: 24px;
     height: 24px;
@@ -57,10 +84,10 @@
     background: #fff;
     animation: flash 2s infinite ease;
     &--item {
-      width: 6px;
-      height: 6px;
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
-      opacity: 0;
+      transform: scale(0);
       background: rgb(74, 76, 77);
       animation: flash 2s infinite ease-in;
     }
@@ -137,32 +164,6 @@
   &__item:hover &__item--common{
     transform: translateY(-50px);
     transition: transform 1s cubic-bezier(0.75, 0, 0.125, 1);
-  }
-  &__svg{
-    position: absolute;
-    right: 0;
-    font-size: 24px;
-    color: #fff;
-    font-family:Arial, Helvetica, sans-serif;
-    &--cell {
-      fill: none;
-      stroke: none;
-      width: 400px;
-      height: 800px;
-    }
-    &--path {
-      fill: #52a7ce;
-      d: path('M200,0 C 200,50  200,50 180,100 Q 160,150 160,200 Q 160,250 180,300 C 200,350 200,350 200,400');
-      transition: d 0.8s cubic-bezier(0.85, 0.21, 0.165, 0.78);
-    }
-  }
-  &__svg:hover &__svg--path{
-    d: path('M200,0 C 200,50  200,50 130,100 Q 60,150 60,200 Q 60,250 130,300 C 200,350 200,350 200,400');
-    transition: d 0.8s cubic-bezier(0.85, 0.21, 0.165, 0.78);
-  }
-  &__svg:hover &__menu {
-    transform: translateX(0px);
-    transition: transform 1.4s ease;
   }
 }
 </style>

@@ -1,7 +1,7 @@
-import App from '@/module/home/index'
-import Blog from '@/module/blog/index'
-import Hobby from '@/module/hobby/index'
-import Libary from '@/module/libary/index'
+const App = () => import(/* webpackChunkName: "app" */ '@/module/home/index')
+const Blog = () => import(/* webpackChunkName: "blog" */ '@/module/blog/index')
+const Hobby = () => import(/* webpackChunkName: "hobby" */ '@/module/hobby/index')
+const Libary = () => import(/* webpackChunkName: "libary" */ '@/module/libary/index')
 
 export default function () {
   return {
