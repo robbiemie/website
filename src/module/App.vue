@@ -36,16 +36,20 @@
             </svg>
             <div class="section2__menu">
               <div class="section2__item section2__item1">
-                <div class="section2__item--text">item1</div>
+                <div class="section2__item--common section2__item--icon"><div class="section2__item--icon1"></div></div>
+                <div class="section2__item--common section2__item--text">Design</div>
               </div>
               <div class="section2__item section2__item2">
-                <div class="section2__item--text">item1</div>
+                <div class="section2__item--common section2__item--icon"><div class="section2__item--icon2"></div></div>
+                <div class="section2__item--common section2__item--text">Hobby</div>
               </div>
               <div class="section2__item section2__item3">
-                <div class="section2__item--text">item1</div>
+                <div class="section2__item--common section2__item--icon"><div class="section2__item--icon3"></div></div>
+                <div class="section2__item--common section2__item--text">Blog</div>
               </div>
               <div class="section2__item section2__item4">
-                <div class="section2__item--text">item1</div>
+                <div class="section2__item--common section2__item--icon"><div class="section2__item--icon4"></div></div>
+                <div class="section2__item--common section2__item--text">Libary</div>
               </div>
             </div>
             <div class="section2__point">
@@ -71,7 +75,7 @@ export default {
   data () {
     return {
       swiperOption: {
-        initialSlide: 1,
+        initialSlide: 0,
         direction: 'vertical',
         effect: 'flip',
         speed: 1000,
@@ -145,10 +149,10 @@ export default {
     position: absolute;
     right: 20px;
     top: calc(50% - 10px);
-    border: 3px solid rgb(33, 216, 16);
+    border: 4px solid rgb(214, 129, 214);
     background-color: transparent;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -156,11 +160,11 @@ export default {
     background: #fff;
     animation: flash 2s infinite ease;
     &--item {
-      width: 4px;
-      height: 4px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       opacity: 0;
-      background: rgb(33, 216, 16);
+      background: rgb(74, 76, 77);
       animation: flash 2s infinite ease-in;
     }
   }
@@ -179,10 +183,60 @@ export default {
     z-index: 999;
   }
   &__item {
-    margin: 20px 0;
+    margin: 20px auto;
     height: 50px;
+    width: 150px;
     text-align: center;
     line-height: 50px;
+    overflow: hidden;
+    &--common {
+      height: 50px;
+      line-height: 50px;
+      transform: translateY(0px);
+      transition: transform 1s ease;
+    }
+    &--icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    &--icon1 {
+      width: 60px;
+      height: 60px;
+      background: url(~@/img/icons/paint.png) no-repeat;
+      background-size: cover;
+      background-position: center center;
+    }
+    &--icon2 {
+      width: 60px;
+      height: 60px;
+      background: url(~@/img/icons/cat.svg) no-repeat;
+      background-size: cover;
+      background-position: center center;
+    }
+    &--icon3 {
+      width: 40px;
+      height: 40px;
+      background: url(~@/img/icons/heart.png) no-repeat;
+      background-size: cover;
+      background-position: center center;
+    }
+    &--icon4 {
+      width: 50px;
+      height: 50px;
+      background: url(~@/img/icons/dog.png) no-repeat;
+      background-size: cover;
+      background-position: center center;
+    }
+    &--text {
+      border: 3px solid transparent;
+      border-left-color: #37474f;
+      border-right-color: #37474f;
+    }
+  }
+  &__item:hover &__item--common{
+    transform: translateY(-50px);
+    transition: transform 1s cubic-bezier(0.75, 0, 0.125, 1);
   }
   &__svg{
     position: absolute;
