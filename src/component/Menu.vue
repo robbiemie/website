@@ -83,6 +83,7 @@
     align-items: center;
     background: #fff;
     animation: flash 2s infinite ease;
+    overflow: hidden;
     &--item {
       width: 14px;
       height: 14px;
