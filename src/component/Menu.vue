@@ -36,8 +36,7 @@
 
 @keyframes flash {
   to {
-    transform: scale(1);
-    box-shadow: 0 0 50px rgb(33, 216, 16);
+    transform: scale(0.8);
   }
 }
 
@@ -73,7 +72,6 @@
     position: absolute;
     right: 20px;
     top: calc(50% - 10px);
-    border: 0px solid rgb(214, 129, 214);
     background-color: transparent;
     width: 24px;
     height: 24px;
@@ -82,14 +80,13 @@
     justify-content: center;
     align-items: center;
     background: #fff;
-    animation: flash 2s infinite ease;
     overflow: hidden;
     &--item {
       width: 14px;
       height: 14px;
       border-radius: 50%;
       transform: scale(0);
-      background: rgb(74, 76, 77);
+      background: rgb(202, 178, 158);
       animation: flash 2s infinite ease-in;
     }
   }

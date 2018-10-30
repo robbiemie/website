@@ -1,4 +1,4 @@
-const SvgTool = () => import(/* webpackChunkName: "svgTool" */ './svgTool/svg.vue')
+const SvgTool = () => import(/* webpackChunkName: "portfoliosvgTool" */ './svgTool/index.vue')
 
 export default [
   {
