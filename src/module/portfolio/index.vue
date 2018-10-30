@@ -11,7 +11,7 @@
       <div class="portfolio__item portfolio__item">
         <div class="portfolio__item--wrap">
           <div class="portfolio__item--common portfolio__item--1"></div>
-          <div class="portfolio__item--common portfolio__item--1"></div>
+          <router-link to="/portfolio/svgtool"><div class="portfolio__item--common portfolio__item--1"></div></router-link>
         </div>
       </div>
       <div class="portfolio__item portfolio__item">
