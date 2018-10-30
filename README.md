@@ -1,5 +1,4 @@
-
-# 个人网址：http://www.yangoogle.com/#/
+# 个人网址：http://www.yangoogle.com
 
 ## todo list
 

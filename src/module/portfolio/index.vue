@@ -11,55 +11,91 @@
       <div class="portfolio__item portfolio__item">
         <div class="portfolio__item--wrap">
           <div class="portfolio__item--common portfolio__item--1"></div>
-          <router-link to="/portfolio/svgtool"><div class="portfolio__item--common portfolio__item--1"></div></router-link>
+          <router-link to="/portfolio/svgtool">
+            <div class="portfolio__item--common portfolio__item--preview1">
+              <div class="portfolio__item--content">preview</div>
+            </div>
+          </router-link>
         </div>
       </div>
       <div class="portfolio__item portfolio__item">
         <div class="portfolio__item--wrap">
           <div class="portfolio__item--common portfolio__item--2"></div>
-          <div class="portfolio__item--common portfolio__item--2"></div>
+          <router-link to="/portfolio/svgtool">
+            <div class="portfolio__item--common portfolio__item--preview1">
+              <div class="portfolio__item--content">Oops!</div>
+            </div>
+          </router-link>
         </div>
       </div>
       <div class="portfolio__item portfolio__item">
         <div class="portfolio__item--wrap">
           <div class="portfolio__item--common portfolio__item--3"></div>
-          <div class="portfolio__item--common portfolio__item--3"></div>
+          <router-link to="/portfolio/svgtool">
+            <div class="portfolio__item--common portfolio__item--preview1">
+              <div class="portfolio__item--content">Oops!</div>
+            </div>
+          </router-link>
         </div>
       </div>
       <div class="portfolio__item portfolio__item">
         <div class="portfolio__item--wrap">
           <div class="portfolio__item--common portfolio__item--4"></div>
-          <div class="portfolio__item--common portfolio__item--4"></div>
+          <router-link to="/portfolio/svgtool">
+            <div class="portfolio__item--common portfolio__item--preview1">
+              <div class="portfolio__item--content">Oops!</div>
+            </div>
+          </router-link>
         </div>
       </div>
       <div class="portfolio__item portfolio__item">
         <div class="portfolio__item--wrap">
           <div class="portfolio__item--common portfolio__item--5"></div>
-          <div class="portfolio__item--common portfolio__item--5"></div>
+          <router-link to="/portfolio/svgtool">
+            <div class="portfolio__item--common portfolio__item--preview1">
+              <div class="portfolio__item--content">Oops!</div>
+            </div>
+          </router-link>
         </div>
       </div>
       <div class="portfolio__item portfolio__item">
         <div class="portfolio__item--wrap">
           <div class="portfolio__item--common portfolio__item--6"></div>
-          <div class="portfolio__item--common portfolio__item--6"></div>
+          <router-link to="/portfolio/svgtool">
+            <div class="portfolio__item--common portfolio__item--preview1">
+              <div class="portfolio__item--content">Oops!</div>
+            </div>
+          </router-link>
         </div>
       </div>
       <div class="portfolio__item portfolio__item">
         <div class="portfolio__item--wrap">
           <div class="portfolio__item--common portfolio__item--7"></div>
-          <div class="portfolio__item--common portfolio__item--7"></div>
+          <router-link to="/portfolio/svgtool">
+            <div class="portfolio__item--common portfolio__item--preview1">
+              <div class="portfolio__item--content">Oops!</div>
+            </div>
+          </router-link>
         </div>
       </div>
       <div class="portfolio__item portfolio__item">
         <div class="portfolio__item--wrap">
           <div class="portfolio__item--common portfolio__item--8"></div>
-          <div class="portfolio__item--common portfolio__item--8"></div>
+          <router-link to="/portfolio/svgtool">
+            <div class="portfolio__item--common portfolio__item--preview1">
+              <div class="portfolio__item--content">Oops!</div>
+            </div>
+          </router-link>
         </div>
       </div>
       <div class="portfolio__item portfolio__item">
         <div class="portfolio__item--wrap">
           <div class="portfolio__item--common portfolio__item--9"></div>
-          <div class="portfolio__item--common portfolio__item--9"></div>
+          <router-link to="/portfolio/svgtool">
+            <div class="portfolio__item--common portfolio__item--preview1">
+              <div class="portfolio__item--content">Oops!</div>
+            </div>
+          </router-link>
         </div>
       </div>
     </div>
@@ -135,6 +171,23 @@ export default {
       transform: translateY(0);
       transition: transform 1s ease-out;
     }
+    &--content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 60px;
+      color: #fff;
+      font-weight: bold;
+      background: rgba($color: #000000, $alpha: 0.5)
+    }
+    &--preview1 {
+      height: 100%;
+      background: url(~@/img/portfolio/svgtool/preview.png) no-repeat;
+      background-position: center center;
+      background-size: cover;
+    }
     &--1 {
       height: 100%;
       background: url(~@/img/portfolio/1.svg) no-repeat;
@@ -190,33 +243,9 @@ export default {
       background-size: cover;
     }
   }
-  &__item:hover &__item--1 {
+  &__item:hover &__item--common {
     transform: translateY(-100%);
     transition: transform 1s ease-in;
-  }
-  &__item:hover &__item--2 {
-    transform: translateY(-100%);
-  }
-  &__item:hover &__item--3 {
-    transform: translateY(-100%);
-  }
-  &__item:hover &__item--4 {
-    transform: translateY(-100%);
-  }
-  &__item:hover &__item--5 {
-    transform: translateY(-100%);
-  }
-  &__item:hover &__item--6 {
-    transform: translateY(-100%);
-  }
-  &__item:hover &__item--7 {
-    transform: translateY(-100%);
-  }
-  &__item:hover &__item--8 {
-    transform: translateY(-100%);
-  }
-  &__item:hover &__item--9 {
-    transform: translateY(-100%);
   }
 }
 </style>
