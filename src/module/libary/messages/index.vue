@@ -1,17 +1,17 @@
 <template>
   <div class="view-work">
-    <!-- <Aratical class="view__artical"/> -->
+    <Aratical class="view__artical"/>
     <div class="view__circle"></div>
   </div>
 </template>
 
 <script>
-// import Aratical from '@/component/artical/index'
+import Aratical from './artical/index'
 
 export default {
   name: 'Work',
   components: {
-    // Aratical
+    Aratical
   },
   data () {
     return {

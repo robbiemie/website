@@ -2,6 +2,7 @@
   <div class="artical">
     <header>
       <div class="artical__title">
+        <LinkLibary/>
         {{$t('message.title')}}
       </div>
       <div class="artical__desc">
@@ -28,8 +29,12 @@
 </template>
 
 <script>
+import LinkLibary from '@/component/link/LinkLibary'
 export default {
   name: 'artical',
+  components: {
+    LinkLibary
+  },
   methods: {
     success () {
       this.$Message.success(this.$t('message.success'))

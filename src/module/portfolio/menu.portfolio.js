@@ -2,7 +2,7 @@ const SvgTool = () => import(/* webpackChunkName: "portfoliosvgTool" */ './svgTo
 
 export default [
   {
-    name: 'svg在线生成工具',
+    name: 'svgtool',
     path: '/portfolio/svgtool',
     component: SvgTool
   }
