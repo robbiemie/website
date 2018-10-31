@@ -10,7 +10,7 @@
     <a href="https://yang657850144.github.io/lucky.github.io/">
       <div class="Blog__list">
         <div class="Blog__wrap"></div>
-        <div class="Blog__mask"></div>
+        <div class="Blog__mask">Preview</div>
       </div>
     </a>
   </section>
@@ -80,6 +80,12 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 60px;
+    font-weight: bold;
     background: rgba(0, 0, 0, 0.5);
   }
   &__list:hover &__wrap {
