@@ -47,9 +47,15 @@ export default {
   methods: {
     success (type = 1) {
       let content = this.$t('message.success')
-      let opts = { content }
+      let opts
       if (type === 2) {
-        opts['themes'] = 'blackGold'
+        opts = {
+          content,
+          themes: 'blackGold',
+          styles: {
+            fontSize: 24
+          }
+        }
       } else {
         opts = content
       }
@@ -57,9 +63,15 @@ export default {
     },
     error (type = 1) {
       let content = this.$t('message.error')
-      let opts = { content }
+      let opts
       if (type === 2) {
-        opts['themes'] = 'blackGold'
+        opts = {
+          content,
+          themes: 'blackGold',
+          styles: {
+            fontSize: 24
+          }
+        }
       } else {
         opts = content
       }
@@ -67,9 +79,15 @@ export default {
     },
     warning (type = 1) {
       let content = this.$t('message.warning')
-      let opts = { content }
+      let opts
       if (type === 2) {
-        opts['themes'] = 'blackGold'
+        opts = {
+          content,
+          themes: 'blackGold',
+          styles: {
+            fontSize: 24
+          }
+        }
       } else {
         opts = content
       }
@@ -77,9 +95,15 @@ export default {
     },
     info (type = 1) {
       let content = this.$t('message.info')
-      let opts = { content }
+      let opts
       if (type === 2) {
-        opts['themes'] = 'blackGold'
+        opts = {
+          content,
+          themes: 'blackGold',
+          styles: {
+            fontSize: 24
+          }
+        }
       } else {
         opts = content
       }
