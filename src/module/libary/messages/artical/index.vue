@@ -17,12 +17,21 @@
       </a>
     </header>
     <div class="artical__content">
-      <div class="artical__btn--main">{{$t('message.demo')}}</div>
-      <div class="artical__list">
-        <div class="artical__btn artical__btn--success" @click="success">{{$t('message.success')}}</div>
-        <div class="artical__btn artical__btn--error" @click="error">{{$t('message.error')}}</div>
-        <div class="artical__btn artical__btn--warning" @click="warning">{{$t('message.warning')}}</div>
-        <div class="artical__btn artical__btn--info" @click="info">{{$t('message.info')}}</div>
+      <div class="artical__btn artical__btn--main artical__btn--theme1">{{$t('message.theme.type1')}}</div>
+      <div class="artical__list artical__list--theme1">
+        <div class="artical__btn artical__btn--success" @click="success(1)">{{$t('message.success')}}</div>
+        <div class="artical__btn artical__btn--error" @click="error(1)">{{$t('message.error')}}</div>
+        <div class="artical__btn artical__btn--warning" @click="warning(1)">{{$t('message.warning')}}</div>
+        <div class="artical__btn artical__btn--info" @click="info(1)">{{$t('message.info')}}</div>
+      </div>
+    </div>
+    <div class="artical__content">
+      <div class="artical__btn artical__btn--main artical__btn--theme2">{{$t('message.theme.type2')}}</div>
+      <div class="artical__list artical__list--theme2">
+        <div class="artical__btn artical__btn--success" @click="success(2)">{{$t('message.success')}}</div>
+        <div class="artical__btn artical__btn--error" @click="error(2)">{{$t('message.error')}}</div>
+        <div class="artical__btn artical__btn--warning" @click="warning(2)">{{$t('message.warning')}}</div>
+        <div class="artical__btn artical__btn--info" @click="info(2)">{{$t('message.info')}}</div>
       </div>
     </div>
   </div>
@@ -36,17 +45,45 @@ export default {
     LinkLibary
   },
   methods: {
-    success () {
-      this.$Message.success(this.$t('message.success'))
+    success (type = 1) {
+      let content = this.$t('message.success')
+      let opts = { content }
+      if (type === 2) {
+        opts['themes'] = 'blackGold'
+      } else {
+        opts = content
+      }
+      this.$Message.success(opts)
     },
-    error () {
-      this.$Message.error(this.$t('message.error'))
+    error (type = 1) {
+      let content = this.$t('message.error')
+      let opts = { content }
+      if (type === 2) {
+        opts['themes'] = 'blackGold'
+      } else {
+        opts = content
+      }
+      this.$Message.error(opts)
     },
-    warning () {
-      this.$Message.warning(this.$t('message.warning'))
+    warning (type = 1) {
+      let content = this.$t('message.warning')
+      let opts = { content }
+      if (type === 2) {
+        opts['themes'] = 'blackGold'
+      } else {
+        opts = content
+      }
+      this.$Message.warning(opts)
     },
-    info () {
-      this.$Message.info(this.$t('message.info'))
+    info (type = 1) {
+      let content = this.$t('message.info')
+      let opts = { content }
+      if (type === 2) {
+        opts['themes'] = 'blackGold'
+      } else {
+        opts = content
+      }
+      this.$Message.info(opts)
     },
     changeLang (lang) {
       console.log('lang', lang, this.$i18n)
@@ -112,64 +149,59 @@ export default {
 
   }
   &__content {
-      margin-top: 300px;
+      margin-top: 100px;
   }
   &__btn {
     margin: 0 10px;
+    width: 120px;
+    height: 46px;
+    text-align: center;
+    line-height: 46px;
+    border-radius: 46px;
     color: #fff;
     font-weight: bold;
     &--main {
       margin: 0 auto;
-      width: 120px;
-      height: 46px;
-      text-align: center;
-      line-height: 46px;
-      border-radius: 46px;
+      width: 200px;
+    }
+    &--theme1 {
+      color: #000;
+      background: rgb(211, 190, 190);
+    }
+    &--theme2 {
       background: #000;
     }
     &--success {
-      width: 120px;
-      height: 46px;
-      text-align: center;
-      line-height: 46px;
-      border-radius: 46px;
       background: #19be6b;
     }
     &--error {
-      width: 120px;
-      height: 46px;
-      text-align: center;
-      line-height: 46px;
-      border-radius: 46px;
       background: #ed4014;
     }
     &--warning {
-      width: 120px;
-      height: 46px;
-      text-align: center;
-      line-height: 46px;
-      border-radius: 46px;
       background: #ff9900;
     }
     &--info {
-      width: 120px;
-      height: 46px;
-      text-align: center;
-      line-height: 46px;
-      border-radius: 46px;
       background: #2db7f5;
+    }
+    &--black {
+      background: #000;
     }
   }
   &__list {
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 30px;
     height: 200px;
     width: 600px;
     display: flex;
     border-radius: 20px;
     align-items: center;
     justify-content: center;
-    background: #7099a334;
+    &--theme1 {
+      background: rgb(211, 190, 190);
+    }
+    &--theme2 {
+      background: #000;
+    }
   }
 }
 </style>

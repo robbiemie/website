@@ -5,6 +5,22 @@ import routeconfig from './router/index'
 import VueI18n from 'vue-i18n'
 import messages from '@/common/language'
 
+import VueMessage from 'vue-messages'
+
+Vue.use(VueMessage, {
+  duration: 1, // unit: s
+  themes: 'classic', // classic or classicBold
+  styles: {
+    top: 24, // unit: px
+    fontWeight: 'normal' // normal or bold
+  },
+  before () {
+    console.log('custom before hook')
+  },
+  done () {
+    console.log('custom done hook')
+  }
+})
 let routers = function () {
   let route = new VueRouter(routeconfig())
   return route
