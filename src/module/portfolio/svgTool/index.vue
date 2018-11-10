@@ -295,6 +295,7 @@ export default {
       this.base.w = svg.width
       this.base.h = svg.height
       path.style.stroke = this.style.stroke
+      this.addDemo()
     },
     translation (val) {
       let url = '//openapi.youdao.com/api?q=' + this.translate.q +
