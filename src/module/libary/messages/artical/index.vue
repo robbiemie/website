@@ -131,9 +131,9 @@ export default {
   }
   &__trans {
       position: fixed;
-      padding: 2px 10px;
+      padding: 2px 20px;
       height: 34px;
-      width: 200px;
+      // width: 200px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -143,6 +143,7 @@ export default {
       font-weight: bold;
       border: 1px solid #000;
       border-radius: 30px;
+      cursor: pointer;
       span {
         margin: 0 10px;
       }
@@ -162,7 +163,7 @@ export default {
     font-weight: bold;
     &--main {
       margin: 0 auto;
-      width: 200px;
+      width: 240px;
     }
     &--theme1 {
       color: #000;

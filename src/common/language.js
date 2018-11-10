@@ -17,8 +17,8 @@ export default {
   en: {
     message: {
       theme: {
-        type1: 'classic theme',
-        type2: 'blackGold theme'
+        type1: 'Classic Theme',
+        type2: 'BlackGold Theme'
       },
       title: 'Mobile UI Component Vue-messages', // 标题
       desc: 'Lightweight Mobile UI Component build on Vue2.0.', // 描述
