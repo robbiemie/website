@@ -1,5 +1,5 @@
 import menuBaseConfig from './menu.base'
-import menuPortfolioConfig from '@/module/portfolio/menu.portfolio.js'
+import menuDocsConfig from '@/module/docs/menu.docs.js'
 import menuBlogConfig from '@/module/blog/menu.blog.js'
 import menuLibaryConfig from '@/module/libary/menu.libary.js'
 
@@ -7,7 +7,7 @@ const groups = [
   /** 一级路由 */
   menuBaseConfig,
   /** 二级路由 */
-  menuPortfolioConfig,
+  menuDocsConfig,
   menuBlogConfig,
   menuLibaryConfig
 ]

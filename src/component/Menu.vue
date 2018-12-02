@@ -15,7 +15,7 @@
       </div>
       <div class="section2__item section2__item2">
         <div class="section2__item--common section2__item--icon"><div class="section2__item--icon2"></div></div>
-        <div class="section2__item--common section2__item--text"><router-link to="/portfolio">Portfolio</router-link></div>
+        <div class="section2__item--common section2__item--text"><router-link to="/docs">Docs</router-link></div>
       </div>
       <div class="section2__item section2__item3">
         <div class="section2__item--common section2__item--icon"><div class="section2__item--icon3"></div></div>

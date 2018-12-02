@@ -21,9 +21,9 @@
       <div class="Libary__item Libary__item">
         <div class="Libary__item--wrap">
           <div class="Libary__item--common Libary__item--2"></div>
-          <router-link to="/lib">
-            <div class="Libary__item--common Libary__item--preview1">
-              <div class="Libary__item--content">Oops!</div>
+          <router-link to="/lib/svgtool">
+            <div class="Libary__item--common Libary__item--preview2">
+              <div class="Libary__item--content">preview</div>
             </div>
           </router-link>
         </div>
@@ -184,6 +184,12 @@ export default {
     &--preview1 {
       height: 100%;
       background: url(~@/img/libary/messages/preview.png) no-repeat;
+      background-position: center center;
+      background-size: cover;
+    }
+    &--preview2 {
+      height: 100%;
+      background: url(~@/img/libary/svgtool/preview.png) no-repeat;
       background-position: center center;
       background-size: cover;
     }

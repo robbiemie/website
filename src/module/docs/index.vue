@@ -2,16 +2,16 @@
 <div class="portfolio">
   <section class="portfolio__content">
     <div class="portfolio__title">
-      portfolio
+      Documents
     </div>
     <div class="portfolio__desc">
-      Selected front-end development projects.
+      Selected front-end development Documents.
     </div>
     <div class="portfolio__list">
       <div class="portfolio__item portfolio__item">
         <div class="portfolio__item--wrap">
-          <div class="portfolio__item--common portfolio__item--1"></div>
-          <router-link to="/portfolio/svgtool">
+          <div class="portfolio__item--common portfolio__item--1">FETP</div>
+          <router-link to="/docs/fetp">
             <div class="portfolio__item--common portfolio__item--preview1">
               <div class="portfolio__item--content">preview</div>
             </div>
@@ -20,8 +20,8 @@
       </div>
       <div class="portfolio__item portfolio__item">
         <div class="portfolio__item--wrap">
-          <div class="portfolio__item--common portfolio__item--2"></div>
-          <router-link to="/portfolio/svgtool">
+          <div class="portfolio__item--common portfolio__item--2">No</div>
+          <router-link to="/docs">
             <div class="portfolio__item--common portfolio__item--preview1">
               <div class="portfolio__item--content">Oops!</div>
             </div>
@@ -30,8 +30,8 @@
       </div>
       <div class="portfolio__item portfolio__item">
         <div class="portfolio__item--wrap">
-          <div class="portfolio__item--common portfolio__item--3"></div>
-          <router-link to="/portfolio/svgtool">
+          <div class="portfolio__item--common portfolio__item--3">No</div>
+          <router-link to="/docs">
             <div class="portfolio__item--common portfolio__item--preview1">
               <div class="portfolio__item--content">Oops!</div>
             </div>
@@ -40,8 +40,8 @@
       </div>
       <div class="portfolio__item portfolio__item">
         <div class="portfolio__item--wrap">
-          <div class="portfolio__item--common portfolio__item--4"></div>
-          <router-link to="/portfolio/svgtool">
+          <div class="portfolio__item--common portfolio__item--4">No</div>
+          <router-link to="/docs">
             <div class="portfolio__item--common portfolio__item--preview1">
               <div class="portfolio__item--content">Oops!</div>
             </div>
@@ -50,8 +50,8 @@
       </div>
       <div class="portfolio__item portfolio__item">
         <div class="portfolio__item--wrap">
-          <div class="portfolio__item--common portfolio__item--5"></div>
-          <router-link to="/portfolio/svgtool">
+          <div class="portfolio__item--common portfolio__item--5">No</div>
+          <router-link to="/docs">
             <div class="portfolio__item--common portfolio__item--preview1">
               <div class="portfolio__item--content">Oops!</div>
             </div>
@@ -60,8 +60,8 @@
       </div>
       <div class="portfolio__item portfolio__item">
         <div class="portfolio__item--wrap">
-          <div class="portfolio__item--common portfolio__item--6"></div>
-          <router-link to="/portfolio/svgtool">
+          <div class="portfolio__item--common portfolio__item--6">No</div>
+          <router-link to="/docs">
             <div class="portfolio__item--common portfolio__item--preview1">
               <div class="portfolio__item--content">Oops!</div>
             </div>
@@ -70,8 +70,8 @@
       </div>
       <div class="portfolio__item portfolio__item">
         <div class="portfolio__item--wrap">
-          <div class="portfolio__item--common portfolio__item--7"></div>
-          <router-link to="/portfolio/svgtool">
+          <div class="portfolio__item--common portfolio__item--7">No</div>
+          <router-link to="/docs">
             <div class="portfolio__item--common portfolio__item--preview1">
               <div class="portfolio__item--content">Oops!</div>
             </div>
@@ -80,8 +80,8 @@
       </div>
       <div class="portfolio__item portfolio__item">
         <div class="portfolio__item--wrap">
-          <div class="portfolio__item--common portfolio__item--8"></div>
-          <router-link to="/portfolio/svgtool">
+          <div class="portfolio__item--common portfolio__item--8">No</div>
+          <router-link to="/docs">
             <div class="portfolio__item--common portfolio__item--preview1">
               <div class="portfolio__item--content">Oops!</div>
             </div>
@@ -90,8 +90,8 @@
       </div>
       <div class="portfolio__item portfolio__item">
         <div class="portfolio__item--wrap">
-          <div class="portfolio__item--common portfolio__item--9"></div>
-          <router-link to="/portfolio/svgtool">
+          <div class="portfolio__item--common portfolio__item--9">No</div>
+          <router-link to="/docs">
             <div class="portfolio__item--common portfolio__item--preview1">
               <div class="portfolio__item--content">Oops!</div>
             </div>
@@ -155,6 +155,11 @@ export default {
     width: 360px;
     height: 300px;
     display: flex;
+    text-align: center;
+    line-height: 300px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 64px;
     justify-content: center;
     align-items: center;
     border-radius: 20px;
@@ -184,61 +189,61 @@ export default {
     }
     &--preview1 {
       height: 100%;
-      background: url(~@/img/portfolio/svgtool/preview.png) no-repeat;
+      // background: url(~@/img/portfolio/preview.png) no-repeat;
       background-position: center center;
       background-size: cover;
     }
     &--1 {
       height: 100%;
-      background: url(~@/img/portfolio/1.svg) no-repeat;
+      // background: url(~@/img/portfolio/1.svg) no-repeat;
       background-position: center center;
       background-size: cover;
     }
     &--2 {
       height: 100%;
-      background: url(~@/img/portfolio/2.svg) no-repeat;
+      // background: url(~@/img/portfolio/2.svg) no-repeat;
       background-position: center center;
       background-size: cover;
     }
     &--3 {
       height: 100%;
-      background: url(~@/img/portfolio/3.svg) no-repeat;
+      // background: url(~@/img/portfolio/3.svg) no-repeat;
       background-position: center center;
       background-size: cover;
     }
     &--4 {
       height: 100%;
-      background: url(~@/img/portfolio/4.svg) no-repeat;
+      // background: url(~@/img/portfolio/4.svg) no-repeat;
       background-position: center center;
       background-size: cover;
     }
     &--5 {
       height: 100%;
-      background: url(~@/img/portfolio/5.svg) no-repeat;
+      // background: url(~@/img/portfolio/5.svg) no-repeat;
       background-position: center center;
       background-size: cover;
     }
     &--6 {
       height: 100%;
-      background: url(~@/img/portfolio/6.svg) no-repeat;
+      // background: url(~@/img/portfolio/6.svg) no-repeat;
       background-position: center center;
       background-size: cover;
     }
     &--7 {
       height: 100%;
-      background: url(~@/img/portfolio/7.svg) no-repeat;
+      // background: url(~@/img/portfolio/7.svg) no-repeat;
       background-position: center center;
       background-size: cover;
     }
     &--8 {
       height: 100%;
-      background: url(~@/img/portfolio/8.svg) no-repeat;
+      // background: url(~@/img/portfolio/8.svg) no-repeat;
       background-position: center center;
       background-size: cover;
     }
     &--9 {
       height: 100%;
-      background: url(~@/img/portfolio/9.svg) no-repeat;
+      // background: url(~@/img/portfolio/9.svg) no-repeat;
       background-position: center center;
       background-size: cover;
     }
