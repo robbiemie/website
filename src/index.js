@@ -12,7 +12,7 @@ Vue.use(VueMessage, {
   themes: 'classic', // classic or classicBold
   styles: {
     top: '20px', // unit: px
-    fontSize: '16px',
+    fontSize: 24,
     padding: '10px',
     fontWeight: 'normal' // normal or bold
   },
