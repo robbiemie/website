@@ -8,11 +8,12 @@ import messages from '@/common/language'
 import VueMessage from 'vue-messages'
 
 Vue.use(VueMessage, {
-  duration: 1, // unit: s
+  duration: 100, // unit: s
   themes: 'classic', // classic or classicBold
   styles: {
-    top: 24, // unit: px
-    fontSize: 24,
+    top: '20px', // unit: px
+    fontSize: '16px',
+    padding: '10px',
     fontWeight: 'normal' // normal or bold
   },
   before () {
