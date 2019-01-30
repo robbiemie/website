@@ -8,7 +8,7 @@ import messages from '@/common/language'
 import VueMessage from 'vue-messages'
 
 Vue.use(VueMessage, {
-  duration: 100, // unit: s
+  duration: 1, // unit: s
   themes: 'classic', // classic or classicBold
   styles: {
     top: '20px', // unit: px
