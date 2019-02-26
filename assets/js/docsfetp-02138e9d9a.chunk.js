@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{92:function(e,n,t){"use strict";t.r(n);var i=t(2),s=Object(i.a)({},function(){var e=this.$createElement;return(this._self._c||e)("div",[this._v("fetp")])},[],!1,null,null,null);s.options.__file="index.vue";n.default=s.exports}}]);
