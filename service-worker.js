@@ -2,7 +2,7 @@ let mainCacheFiles = [
   'index.html'
 ]
 
-let version = 'cache-v2'
+let version = 'cache-v1'
 
 // 缓存静态资源
 self.addEventListener('install', function (evt) {
