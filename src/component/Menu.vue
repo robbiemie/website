@@ -15,11 +15,11 @@
       </div>
       <div class="section2__item section2__item2">
         <div class="section2__item--common section2__item--icon"><div class="section2__item--icon2"></div></div>
-        <div class="section2__item--common section2__item--text"><router-link to="/docs">Docs</router-link></div>
+        <div class="section2__item--common section2__item--text"><a :href="proto+'github.com/yang657850144'">Github</a></div>
       </div>
       <div class="section2__item section2__item3">
         <div class="section2__item--common section2__item--icon"><div class="section2__item--icon3"></div></div>
-        <div class="section2__item--common section2__item--text"><router-link to="/blog">Blog</router-link></div>
+        <div class="section2__item--common section2__item--text"><a :href="proto+'blog.csdn.net/u013243347'">Blog</a></div>
       </div>
       <div class="section2__item section2__item4">
         <div class="section2__item--common section2__item--icon"><div class="section2__item--icon4"></div></div>
@@ -31,6 +31,17 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'menu',
+  data () {
+    return {
+      proto: 'https://'
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 
