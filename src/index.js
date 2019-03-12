@@ -4,7 +4,6 @@ import App from './module/App'
 import routeconfig from './router/index'
 import VueI18n from 'vue-i18n'
 import messages from '@/common/language'
-
 import VueMessage from 'vue-messages'
 
 Vue.use(VueMessage, {

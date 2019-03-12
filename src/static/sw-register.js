@@ -2,7 +2,8 @@ if (navigator.serviceWorker) {
   console.log('当前环境支持serviceworker')
   navigator.serviceWorker.addEventListener('message', function (e) {
     // if(e.data==='sw')
-    console.log('evt', e, e.data)
+    console.log('重新加载页面', e.data)
+    location.reload()
   })
   navigator.serviceWorker.register('service-worker.js?v=cache-v1', { scope: './' }).then(registration => {
     console.log('注册成功')
