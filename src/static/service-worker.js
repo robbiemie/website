@@ -16,24 +16,24 @@ self.addEventListener('install', function (evt) {
   )
 })
 
-// self.clients.matchAll()
-//   .then(function (clients) {
-//     if (clients && clients.length) {
-//       clients.forEach(function (client) {
-//       // 发送字符串'sw.update'
-//         console.log('发送字符串 sw.update')
-//         client.postMessage('sw.update')
-//       })
-//     }
-//   })
 // 缓存更新
 self.addEventListener('activate', function (evt) {
   console.log(`${version} activating...`)
+  self.clients.matchAll().then(clients => {
+    clients.forEach(client => {
+      console.log('client', client)
+      client.postMessage({ type: 'update', msg: '' })
+    })
+  })
   evt.waitUntil(
     caches.keys().then(function (cacheNames) {
+      console.log('cacheNames', cacheNames)
       return Promise.all(
         cacheNames.map(function (cacheName) {
-
+          if (cacheName !== version) {
+            // 删除无效 cacheName
+            return caches.delete(cacheName)
+          }
         })
       )
     })
@@ -42,17 +42,17 @@ self.addEventListener('activate', function (evt) {
 
 // 请求拦截
 self.addEventListener('fetch', function (evt) {
-  console.log('处理fetch事件:', evt.request.url)
+  // console.log('处理fetch事件:', evt.request.url)
   if (evt.request.url.match('sockjs')) return
   evt.respondWith(
     caches.match(evt.request).then(function (response) {
       if (response) {
-        console.log('缓存匹配到res:', response)
+        // console.log('缓存匹配到res:', response)
         return response
       }
-      console.log('缓存未匹配对应request,准备从network获取', caches)
+      // console.log('缓存未匹配对应request,准备从network获取', caches)
       return fetch(evt.request).then(function (response) {
-        console.log('fetch获取到的response:', response)
+        // console.log('fetch获取到的response:', response)
         // caches.open(version).then(function (cache) {
         //   cache.put(evt.request, response)
         // })

@@ -4,7 +4,6 @@ import App from './module/App'
 import routeconfig from './router/index'
 import VueI18n from 'vue-i18n'
 import messages from '@/common/language'
-import '@/static/sw-register'
 
 import VueMessage from 'vue-messages'
 
