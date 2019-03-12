@@ -1,0 +1,6 @@
+<script>
+    let script = document.createElement('script')
+    let firstScript = document.body.getElementsByTagName('script')[0]
+    script.src=`./sw-register.js?v=${Date.now()}`
+    firstScript.parentNode.insertBefore(script,firstScript)
+</script>

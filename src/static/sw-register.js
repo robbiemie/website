@@ -1,7 +1,10 @@
-
 if (navigator.serviceWorker) {
   console.log('当前环境支持serviceworker')
-  navigator.serviceWorker.register('service-worker.js', { scope: './' }).then(registration => {
+  navigator.serviceWorker.addEventListener('message', function (e) {
+    // if(e.data==='sw')
+    console.log('evt', e, e.data)
+  })
+  navigator.serviceWorker.register('service-worker.js?v=cache-v1', { scope: './' }).then(registration => {
     console.log('注册成功')
     let serviceWorker
     if (registration.installing) {

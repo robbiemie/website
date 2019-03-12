@@ -2,11 +2,12 @@ let mainCacheFiles = [
   'index.html'
 ]
 
-let version = 'cache-v1'
+let version = 'cache-version1'
 
 // 缓存静态资源
 self.addEventListener('install', function (evt) {
   // 强制更新sw.js
+  console.log(`${version} installing...`)
   self.skipWaiting()
   evt.waitUntil(
     caches.open(version).then(function (cache) {
@@ -15,15 +16,24 @@ self.addEventListener('install', function (evt) {
   )
 })
 
+// self.clients.matchAll()
+//   .then(function (clients) {
+//     if (clients && clients.length) {
+//       clients.forEach(function (client) {
+//       // 发送字符串'sw.update'
+//         console.log('发送字符串 sw.update')
+//         client.postMessage('sw.update')
+//       })
+//     }
+//   })
 // 缓存更新
-self.addEventListener('active', function (evt) {
+self.addEventListener('activate', function (evt) {
+  console.log(`${version} activating...`)
   evt.waitUntil(
     caches.keys().then(function (cacheNames) {
       return Promise.all(
         cacheNames.map(function (cacheName) {
-          if (cacheName !== version) {
-            return caches.delete(cacheName)
-          }
+
         })
       )
     })
