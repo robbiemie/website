@@ -5,7 +5,7 @@ if ('serviceWorker' in navigator) {
     console.log('重新加载页面', e.data)
     location.reload()
   })
-  let version = 1.0
+  let version = 1.1
   let projName = 'website'
   // if (projName.indexOf('/') === 0) {
   //   projName = projName.slice(projName.indexOf('/') + 1)
