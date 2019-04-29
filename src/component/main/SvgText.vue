@@ -7,7 +7,7 @@
       <defs
           id="defs6125" />
 
-      <SvgElvis/>
+      <SvgRobbie/>
       <g
           inkscape:label="Layer 1"
           inkscape:groupmode="layer"
@@ -56,11 +56,12 @@
 </template>
 
 <script>
-import SvgElvis from './SvgElvis'
+// import SvgElvis from './SvgElvis'
+import SvgRobbie from './SvgRobbie'
 export default {
   name: 'svgtext',
   components: {
-    SvgElvis
+    SvgRobbie
   }
 }
 </script>
